@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/d8/public_html/d8digital
+    - /bin/cp -r . $DEPLOYPATH
