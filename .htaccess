@@ -1,0 +1,71 @@
+# ── D8.Digital Apache config (Verpex) ────────────────────────
+Options -Indexes
+
+# 404 → homepage (serve homepage content on unknown URLs)
+ErrorDocument 404 /
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirect www → non-www
+  RewriteCond %{HTTP_HOST} ^www\.d8\.digital$ [NC]
+  RewriteRule ^ https://d8.digital%{REQUEST_URI} [L,R=301]
+
+  # Redirect old domain (Demonstr8d.com → d8.digital)
+  RewriteCond %{HTTP_HOST} ^(www\.)?demonstr8d\.com$ [NC]
+  RewriteRule ^ https://d8.digital%{REQUEST_URI} [L,R=301]
+
+  # ── Old homepage filename → root ──────────────────────────
+  RewriteRule ^d8-digital-homepage\.html$ / [L,R=301]
+
+  # ── Old WordPress blog posts → new blog URLs ─────────────
+  RewriteRule ^website-redesign-5-reasons-you-should-consider-one-this-year/?$ /blog/post.html?slug=website-redesign-signs [L,R=301]
+  RewriteRule ^how-your-website-can-give-your-business-the-boost-that-it-needs/?$ /blog/post.html?slug=what-makes-a-great-business-website [L,R=301]
+  RewriteRule ^why-you-need-local-seo/?$ /blog/post.html?slug=why-you-need-local-seo [L,R=301]
+  RewriteRule ^what-is-local-seo/?$ /blog/post.html?slug=what-is-local-seo [L,R=301]
+  RewriteRule ^local-seo-ranking-factors/?$ /blog/post.html?slug=local-seo-ranking-factors [L,R=301]
+  RewriteRule ^how-to-rank-in-google-maps/?$ /blog/post.html?slug=how-to-rank-in-google-maps [L,R=301]
+  RewriteRule ^local-citations/?$ /blog/post.html?slug=local-citations-nap-consistency [L,R=301]
+  RewriteRule ^local-onpage-optimization/?$ /blog/post.html?slug=local-onpage-optimization [L,R=301]
+  RewriteRule ^local-link-building/?$ /blog/post.html?slug=local-link-building [L,R=301]
+  RewriteRule ^how-to-get-your-local-business-reviewed/?$ /blog/post.html?slug=how-to-get-your-local-business-reviewed [L,R=301]
+
+  # ── Old WordPress page slugs → new pages ─────────────────
+  RewriteRule ^services/?$ /services.html [L,R=301]
+  RewriteRule ^about/?$ /about.html [L,R=301]
+  RewriteRule ^contact/?$ /#contact [L,R=301]
+  RewriteRule ^portfolio/?$ /work/index.html [L,R=301]
+  RewriteRule ^work/?$ /work/index.html [L,R=301]
+
+  # ── /seo-website-build/ → .html ──────────────────────────
+  RewriteRule ^seo-website-build/?$ /seo-website-build.html [L,R=301]
+</IfModule>
+
+# ── Cache headers ─────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType application/json        "access plus 1 week"
+  ExpiresByType text/html               "access plus 1 hour"
+</IfModule>
+
+# ── Compression ───────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/xml image/svg+xml
+</IfModule>
+
+# ── Security headers ──────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -1,0 +1,28 @@
+# D8.Digital
+
+> Boutique digital agency with offices in Houston, TX and Manila, PH. We build brands, websites, and SEO strategies for ambitious businesses. Formerly Demonstr8d Solutions.
+
+## Services
+
+- [Branding & Identity](/services.html) — Logo systems, visual language, brand guidelines, messaging strategy
+- [Web Design & Development](/services.html) — Custom websites, eCommerce stores (Shopify, WooCommerce), conversion-optimized landing pages
+- [SEO & Organic Growth](/services.html) — Technical SEO, local SEO for Houston, keyword strategy, backlink development
+- [Hosting & Maintenance](/services.html) — Managed cloud hosting, security monitoring, automated backups, content updates
+- [eCommerce Solutions](/services.html) — Shopify and WooCommerce builds, product page design, payment integration
+- [Digital Marketing Consulting](/services.html) — Strategy and planning, email automation, analytics, campaign direction
+
+## Portfolio
+
+- [Blume Laboratories](/work/blume-laboratories.html) — Full brand identity + web for a Houston health & wellness brand. 2× distributor inquiries, 40% conversion improvement.
+- [ARW Jewelry](/work/arw-jewelry.html) — Custom eCommerce + identity for a Houston artisan jeweler. Launched on time, platform built to scale.
+- [All Work](/work/index.html)
+
+## Company
+
+- [About](/about.html) — Formerly Demonstr8d Solutions. Offices in Houston, TX (primary) and Manila, PH. Boutique team with big-agency capability.
+- Contact: hello@d8.digital
+
+## Optional
+
+- [Full Services Page](/services.html)
+- [Work Portfolio](/work/index.html)

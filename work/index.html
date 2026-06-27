@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work | D8.Digital</title>
+  <meta name="description" content="Selected client work from D8.Digital. Branding, web design, eCommerce, and SEO projects for Houston businesses.">
+  <meta property="og:title" content="Work, D8.Digital | Portfolio">
+  <meta property="og:description" content="Branding, web design, eCommerce, and SEO work from Houston and Manila.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    /* ── Filter bar ─────────────────────────────────────────── */
+    .filter-bar { display: flex; gap: .625rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .filter-btn {
+      padding: .5rem 1.25rem; border-radius: 100px;
+      border: 1px solid var(--rule); background: transparent;
+      color: var(--ink2); font-family: 'Archivo', sans-serif;
+      font-size: .8rem; font-weight: 400;
+      cursor: pointer; transition: background .2s, border-color .2s, color .2s;
+    }
+    .filter-btn:hover { border-color: var(--rule2); color: var(--ink); }
+    .filter-btn.active { background: var(--green); border-color: var(--green); color: var(--bg); font-weight: 600; }
+
+    /* ── Work grid ──────────────────────────────────────────── */
+    #work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+      gap: 1.75rem;
+    }
+    .wcard {
+      border-radius: 14px; overflow: hidden;
+      position: relative; cursor: pointer;
+      display: block; text-decoration: none;
+      transition: transform .5s var(--eq);
+    }
+    .wcard:hover { transform: translateY(-6px); }
+    .wcard-art { width: 100%; aspect-ratio: 16/10; position: relative; transition: transform .7s var(--eq); }
+    .wcard:hover .wcard-art { transform: scale(1.04); }
+
+    .wcard-info {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, oklch(5% 0.008 145 / 0.92) 0%, oklch(5% 0.008 145 / 0.1) 55%, transparent 100%);
+      padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .wcard-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .wcard-tag {
+      font-size: .67rem; font-weight: 600; color: var(--green);
+      letter-spacing: .12em; text-transform: uppercase;
+      background: oklch(5% 0.008 145 / 0.6); padding: .2rem .625rem;
+      border-radius: 100px;
+    }
+    .wcard-title {
+      font-family: 'Archivo', sans-serif; font-weight: 800;
+      letter-spacing: -.025em; line-height: 1.15; color: var(--ink);
+      font-size: 1.5rem;
+    }
+    .wcard-excerpt { color: oklch(80% 0.01 145); font-size: .875rem; line-height: 1.55; margin-top: .5rem; }
+    .wcard-arrow {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: oklch(5% 0.008 145 / 0.55);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity .3s, transform .3s var(--eq);
+    }
+    .wcard:hover .wcard-arrow { opacity: 1; transform: translateY(0); }
+
+    /* ── Empty state ────────────────────────────────────────── */
+    #work-empty {
+      display: none; text-align: center; padding: 5rem 0;
+      color: var(--ink3); font-size: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cur"  id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+
+  <div id="nav-mount"></div>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="hero-inner">
+      <h1 class="page-h1">
+        <span class="ln"><span class="ln-in">Selected</span></span>
+        <span class="ln"><span class="ln-in g">Work.</span></span>
+      </h1>
+      <p class="page-hero-sub">Brands we've built, websites we've launched, and results we can point to. Every project is custom, every result is real.</p>
+    </div>
+  </header>
+
+  <!-- WORK GRID (data-driven) -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+      </div>
+      <div id="work-grid"></div>
+      <p id="work-empty">No projects in this category yet.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contact" style="background:var(--bg)">
+    <div class="cta-inner">
+      <div class="lbl rv" style="justify-content:center">Start a Project</div>
+      <h2 class="cta-h2 rv">Your Brand<br>Could Be<br><span class="g">Next.</span></h2>
+      <p class="cta-sub rv d1">Every project above started with a free strategy call. Book yours and let's talk about what your brand needs to compete.</p>
+      <div class="rv d2">
+        <a href="/book.html" class="btn-fill">Schedule Your Free Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="/shared/components.js"></script>
+  <script>
+    (async function () {
+      const res   = await fetch('/data/projects.json');
+      const { projects } = await res.json();
+
+      /* Build filter buttons from unique tags */
+      const allTags = [...new Set(projects.flatMap(p => p.tags))];
+      const bar = document.getElementById('filter-bar');
+      allTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = tag;
+        btn.textContent = tag;
+        bar.appendChild(btn);
+      });
+
+      let active = 'all';
+      bar.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        active = btn.dataset.filter;
+        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        render();
+      });
+
+      function render() {
+        const grid  = document.getElementById('work-grid');
+        const empty = document.getElementById('work-empty');
+        const list  = active === 'all' ? projects : projects.filter(p => p.tags.includes(active));
+
+        if (list.length === 0) {
+          grid.innerHTML = '';
+          empty.style.display = 'block';
+          return;
+        }
+        empty.style.display = 'none';
+        grid.innerHTML = list.map(p => `
+          <a href="/work/${p.slug}.html" class="wcard rv">
+            <div class="wcard-art ${p.art || 'art-default'}"></div>
+            <div class="wcard-info">
+              <div class="wcard-tags">${p.tags.map(t => `<span class="wcard-tag">${t}</span>`).join('')}</div>
+              <div class="wcard-title">${p.title}</div>
+              <div class="wcard-excerpt">${p.excerpt}</div>
+            </div>
+            <div class="wcard-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg>
+            </div>
+          </a>`).join('');
+
+        /* Wire reveals for newly injected cards */
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        grid.querySelectorAll('.rv').forEach(el => io.observe(el));
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

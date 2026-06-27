@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | D8.Digital | Houston &amp; Manila Digital Agency</title>
+  <meta name="description" content="D8.Digital is a boutique digital agency with offices in Houston, TX and Manila, PH. We build brands that convert, not just impress.">
+  <meta property="og:title" content="About, D8.Digital | Houston &amp; Manila Digital Agency">
+  <meta property="og:description" content="Boutique agency. Big-agency capability. Offices in Houston, TX and Manila, PH.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://d8.digital/about.html">
+  <link rel="canonical" href="https://d8.digital/about.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    /* about page: flip the hero glow to the left */
+    .page-hero::before { top: -120px; right: auto; left: -180px; width: 600px; height: 600px; }
+
+    /* ── Story ──────────────────────────────────────────────── */
+    .story-grid {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: clamp(3rem, 7vw, 7rem); align-items: start;
+    }
+    .story-h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 800; line-height: .93; letter-spacing: -.042em;
+      margin-bottom: 2.5rem;
+    }
+    .story-body { color: var(--ink2); font-size: 1.025rem; line-height: 1.78; }
+    .story-body p + p { margin-top: 1.5rem; }
+    .story-body strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Values ─────────────────────────────────────────────── */
+    .values-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem; margin-top: 4rem;
+    }
+    .value-card {
+      padding: 2.5rem; border: 1px solid var(--rule);
+      border-radius: 14px;
+      transition: border-color .25s;
+    }
+    .value-card:hover { border-color: var(--green-dim); }
+    .value-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: var(--green-muted);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.375rem;
+    }
+    .value-icon svg { stroke: var(--green); }
+    .value-name {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em;
+      margin-bottom: .625rem;
+    }
+    .value-desc { color: var(--ink2); font-size: .9rem; line-height: 1.65; }
+
+    /* ── Rebrand ────────────────────────────────────────────── */
+    .rebrand-strip {
+      border: 1px solid var(--rule); border-radius: 14px;
+      padding: clamp(2.5rem, 4vw, 3.5rem);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: center;
+    }
+    .rebrand-eyebrow { color: var(--green); font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+    .rebrand-h3 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.75rem);
+      font-weight: 800; letter-spacing: -.035em; line-height: 1.05;
+      margin-bottom: 1.125rem;
+    }
+    .rebrand-body { color: var(--ink2); font-size: 1rem; line-height: 1.72; max-width: 600px; }
+    .rebrand-aside { text-align: center; flex-shrink: 0; }
+    .rebrand-then { font-family: 'Archivo', sans-serif; font-size: .7rem; font-weight: 600; color: var(--ink3); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .75rem; }
+    .rebrand-name-old { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--ink3); letter-spacing: -.04em; margin-bottom: 1.25rem; }
+    .rebrand-arrow { color: var(--green); font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .rebrand-name-new { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -.04em; }
+    .rebrand-name-new .dot { color: var(--green); }
+
+    /* ── Offices ────────────────────────────────────────────── */
+    .offices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .office-card {
+      padding: 2.5rem; border: 1px solid var(--rule); border-radius: 14px;
+      position: relative; overflow: hidden;
+    }
+    .office-card::before {
+      content: ''; position: absolute;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, var(--green-g1) 0%, transparent 70%);
+      bottom: -60px; right: -60px; pointer-events: none;
+    }
+    .office-flag { font-size: 2rem; margin-bottom: 1.125rem; }
+    .office-city {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em;
+      margin-bottom: .25rem;
+    }
+    .office-country { color: var(--ink3); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .office-desc { color: var(--ink2); font-size: .9rem; line-height: 1.65; }
+
+    /* ── Team / Approach ────────────────────────────────────── */
+    .approach-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem); align-items: center;
+    }
+    .approach-h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+      font-weight: 800; line-height: .95; letter-spacing: -.04em;
+      margin-bottom: 2rem;
+    }
+    .approach-body { color: var(--ink2); font-size: 1.025rem; line-height: 1.72; }
+    .approach-body p + p { margin-top: 1.25rem; }
+    .approach-list {
+      list-style: none; display: flex; flex-direction: column; gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .approach-list li {
+      display: flex; gap: 1.25rem;
+      border-top: 1px solid var(--rule); padding-top: 1.25rem;
+    }
+    .approach-list li:first-child { border-top: none; padding-top: 0; }
+    .al-num { color: var(--ink3); font-size: .72rem; font-weight: 600; letter-spacing: .06em; flex-shrink: 0; padding-top: .1rem; }
+    .al-text { color: var(--ink2); font-size: .925rem; line-height: 1.62; }
+    .al-text strong { color: var(--ink); font-weight: 600; font-size: .95rem; display: block; margin-bottom: .2rem; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .rebrand-strip { grid-template-columns: 1fr; }
+      .rebrand-aside { text-align: left; }
+    }
+    @media (max-width: 720px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .offices-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cur"  id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+
+  <div id="nav-mount"></div>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="hero-inner">
+      <h1 class="page-h1">
+        <span class="ln"><span class="ln-in">Who</span></span>
+        <span class="ln"><span class="ln-in g">We Are.</span></span>
+      </h1>
+      <p class="page-hero-sub">A boutique digital agency with big-agency capability and the attention of a partner, not a vendor. Based in Houston and Manila, built for businesses that want results they can see.</p>
+    </div>
+  </header>
+
+  <!-- STORY -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="lbl rv">Our Story</div>
+      <div class="story-grid">
+        <div>
+          <h2 class="story-h2 rv">Built on<br>Doing the<br><span class="g">Work Right.</span></h2>
+        </div>
+        <div class="story-body rv d1">
+          <p>D8.Digital was founded on a simple conviction: <strong>most businesses deserve better than what they're getting.</strong> Better design. Better strategy. Better execution. The kind of work that holds up to scrutiny, earns trust, and compounds in value over time.</p>
+          <p>We started as Demonstr8d Solutions, working with Houston-area entrepreneurs who were being underserved by cookie-cutter agencies and oversold by big firms that assigned them a junior team. We built a reputation doing what we said we'd do, on time, and without the drama.</p>
+          <p>The rebrand to D8.Digital reflects where we've grown: a sharper focus, a wider reach with our Manila team, and a practice built around digital-first strategy for businesses ready to compete at the next level. <strong>The name changed. The results didn't.</strong></p>
+          <p>We're selective about the clients we take on, because doing this work well takes genuine attention. Every project gets our A-team, not an account manager and an offshore handoff.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="lbl rv">What Drives Us</div>
+      <h2 class="story-h2 rv" style="margin-bottom:0">Three Things We<br><span class="g">Don't Compromise On.</span></h2>
+      <div class="values-grid">
+        <div class="value-card rv">
+          <div class="value-icon">
+            <svg width="22" height="22" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="value-name">No Templates. Ever.</div>
+          <p class="value-desc">Every logo, every website, every campaign we produce is designed from scratch. Not because it takes longer, but because template thinking produces template results. Your competitors can buy a theme. You can't buy the thinking behind custom work.</p>
+        </div>
+        <div class="value-card rv d1">
+          <div class="value-icon">
+            <svg width="22" height="22" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="value-name">Clarity Over Complexity</div>
+          <p class="value-desc">We don't build decks to impress you. We build strategies you can execute. Complicated-sounding plans that require you to hire us forever aren't a service, they're a dependency. Our job is to make your business stronger, not more reliant on us.</p>
+        </div>
+        <div class="value-card rv d2">
+          <div class="value-icon">
+            <svg width="22" height="22" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+          </div>
+          <div class="value-name">Results Are the Only Metric</div>
+          <p class="value-desc">Pretty work that doesn't perform isn't good work. We measure what matters: conversion rates, search rankings, inquiry volume, revenue. Design and strategy are tools. Results are the point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REBRAND -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="rebrand-strip rv">
+        <div>
+          <div class="rebrand-eyebrow">The Evolution</div>
+          <h3 class="rebrand-h3">From Demonstr8d Solutions<br>to <span class="g">D8.Digital</span></h3>
+          <p class="rebrand-body">After years of building brands and digital presence for Houston businesses under the Demonstr8d Solutions banner, we made a decision that matched what we practice: if your brand no longer reflects who you are, change it. The rebrand to D8.Digital isn't a pivot. It's a sharper articulation of the work we've always done. Digital-first strategy for businesses that refuse to be invisible.</p>
+        </div>
+        <div class="rebrand-aside">
+          <div class="rebrand-then">Then</div>
+          <div class="rebrand-name-old">Demonstr8d</div>
+          <div class="rebrand-arrow">&#8595;</div>
+          <div class="rebrand-then">Now</div>
+          <div class="rebrand-name-new">D8<span class="dot">.</span>Digital</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFICES -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="lbl rv">Where We Work</div>
+      <h2 class="story-h2 rv">Two Cities.<br><span class="g">One Standard.</span></h2>
+      <div class="offices-grid">
+        <div class="office-card rv">
+          <div class="office-flag">&#127482;&#127480;</div>
+          <div class="office-city">Houston, Texas</div>
+          <div class="office-country">United States</div>
+          <p class="office-desc">Our home base. Houston is our market and our proving ground. We know the business landscape here, the local search environment, and what it takes for a Houston-area business to stand out. Every strategy we build is informed by being here, not just working here.</p>
+        </div>
+        <div class="office-card rv d1">
+          <div class="office-flag">&#127477;&#127469;</div>
+          <div class="office-city">Manila, Philippines</div>
+          <div class="office-country">Philippines</div>
+          <p class="office-desc">Our Manila team expands our capability without expanding your cost. Skilled designers, developers, and strategists working in your time zone windows, enabling us to deliver faster, cover more ground, and offer boutique-level work at a price that doesn't require a VC budget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="approach-grid">
+        <div>
+          <div class="lbl rv">How We Work</div>
+          <h2 class="approach-h2 rv">We Don't Do<br><span class="g">Handed Off.</span></h2>
+          <div class="approach-body rv d1">
+            <p>Every client works directly with the people doing the work. Not an account manager who relays messages. Not a project manager who's never opened your brand guidelines. Us. The people building your brand are the people you talk to.</p>
+            <p>That means faster decisions, fewer miscommunications, and work that actually reflects your feedback instead of a game of telephone.</p>
+          </div>
+        </div>
+        <ul class="approach-list rv d2">
+          <li>
+            <span class="al-num">01</span>
+            <div class="al-text"><strong>Discovery that goes deep</strong>We spend more time on the front end than most agencies spend total. Understanding your business, your market, and your goals is what makes everything else work.</div>
+          </li>
+          <li>
+            <span class="al-num">02</span>
+            <div class="al-text"><strong>Transparent process</strong>You know what's happening and why. No black boxes, no "trust us, it'll be great." You're involved at every decision that matters.</div>
+          </li>
+          <li>
+            <span class="al-num">03</span>
+            <div class="al-text"><strong>Built to hand over</strong>When we're done, you own everything. No proprietary systems designed to lock you in. Files, code, accounts, all of it goes to you.</div>
+          </li>
+          <li>
+            <span class="al-num">04</span>
+            <div class="al-text"><strong>Relationships over retainers</strong>We offer ongoing support because clients want it, not because we engineer dependency. If you need us, we're here. If you don't, we've done our job.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contact" style="background:var(--bg2)">
+    <div class="cta-inner">
+      <div class="lbl rv" style="justify-content:center">Work With Us</div>
+      <h2 class="cta-h2 rv">Let's Build<br>Something<br><span class="g">Worth Showing.</span></h2>
+      <p class="cta-sub rv d1">Book a free 30-minute call. We'll talk about your business, where you want to go, and whether we're the right fit to help get you there.</p>
+      <div class="rv d2">
+        <a href="/book.html" class="btn-fill">Schedule a Free Strategy Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="/shared/components.js"></script>
+</body>
+</html>

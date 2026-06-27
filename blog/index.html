@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | D8.Digital | Digital Marketing &amp; Web Design Insights</title>
+  <meta name="description" content="Insights on branding, web design, SEO, and digital marketing for Houston businesses. Updated monthly by the D8.Digital team.">
+  <meta property="og:title" content="Blog, D8.Digital | Digital Marketing &amp; Web Design Insights">
+  <meta property="og:description" content="Insights on branding, web design, SEO, and digital marketing for Houston businesses.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://d8.digital/blog/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    /* ── Filter bar ────────────────────────────────── */
+    .filter-bar { display: flex; gap: .625rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .filter-btn {
+      padding: .5rem 1.25rem; border-radius: 100px;
+      border: 1px solid var(--rule); background: transparent;
+      color: var(--ink2); font-family: 'Archivo', sans-serif;
+      font-size: .8rem; font-weight: 400;
+      cursor: pointer; transition: background .2s, border-color .2s, color .2s;
+    }
+    .filter-btn:hover { border-color: var(--rule2); color: var(--ink); }
+    .filter-btn.active { background: var(--green); border-color: var(--green); color: var(--bg); font-weight: 600; }
+
+    /* ── Blog grid ─────────────────────────────────── */
+    #blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+      gap: 1.75rem;
+    }
+    .bcard {
+      border-radius: 14px; overflow: hidden;
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      transition: transform .4s var(--eq), border-color .25s;
+    }
+    .bcard:hover { transform: translateY(-5px); border-color: var(--rule2); }
+    .bcard-body { padding: 1.75rem 1.75rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .bcard-meta {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .bcard-cat {
+      font-size: .67rem; font-weight: 600; color: var(--green);
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .bcard-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink3); }
+    .bcard-date { font-size: .75rem; color: var(--ink3); }
+    .bcard-read { font-size: .75rem; color: var(--ink3); }
+    .bcard-title {
+      font-family: 'Archivo', sans-serif; font-weight: 800;
+      font-size: 1.15rem; line-height: 1.25; letter-spacing: -.02em;
+      color: var(--ink); margin-bottom: .75rem;
+      transition: color .2s;
+    }
+    .bcard:hover .bcard-title { color: var(--green); }
+    .bcard-excerpt { color: var(--ink2); font-size: .875rem; line-height: 1.6; flex: 1; }
+    .bcard-foot {
+      padding: 1rem 1.75rem 1.5rem;
+      display: flex; align-items: center; justify-content: flex-end;
+      border-top: 1px solid var(--rule);
+    }
+    .bcard-more {
+      font-size: .8rem; font-weight: 600; color: var(--green);
+      display: flex; align-items: center; gap: .375rem;
+      transition: gap .2s var(--eq);
+    }
+    .bcard:hover .bcard-more { gap: .625rem; }
+
+    #blog-empty {
+      display: none; text-align: center; padding: 5rem 0;
+      color: var(--ink3); font-size: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cur"  id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+
+  <div id="nav-mount"></div>
+
+  <header class="page-hero">
+    <div class="hero-inner">
+      <h1 class="page-h1">
+        <span class="ln"><span class="ln-in">The</span></span>
+        <span class="ln"><span class="ln-in g">Blog.</span></span>
+      </h1>
+      <p class="page-hero-sub">Insights on branding, web design, SEO, and digital marketing for Houston businesses, updated monthly.</p>
+    </div>
+  </header>
+
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+      </div>
+      <div id="blog-grid"></div>
+      <p id="blog-empty">No posts in this category yet.</p>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="background:var(--bg)">
+    <div class="cta-inner">
+      <div class="lbl rv" style="justify-content:center">Work With Us</div>
+      <h2 class="cta-h2 rv">Ready to<br>Grow Your<br><span class="g">Brand?</span></h2>
+      <p class="cta-sub rv d1">Every engagement starts with a free strategy call. Let's talk about your business, your goals, and what it will take to get there.</p>
+      <div class="rv d2">
+        <a href="/book.html" class="btn-fill">Schedule Your Free Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="/shared/components.js"></script>
+  <script>
+    (async function () {
+      const res = await fetch('/data/blog.json');
+      const { posts } = await res.json();
+
+      /* Build filter buttons from unique categories */
+      const cats = [...new Set(posts.map(p => p.category))];
+      const bar = document.getElementById('filter-bar');
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = cat;
+        btn.textContent = cat;
+        bar.appendChild(btn);
+      });
+
+      let active = 'all';
+      bar.addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        active = btn.dataset.filter;
+        bar.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        render();
+      });
+
+      function formatDate(str) {
+        return new Date(str + 'T12:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function render() {
+        const grid  = document.getElementById('blog-grid');
+        const empty = document.getElementById('blog-empty');
+        const list  = active === 'all' ? posts : posts.filter(p => p.category === active);
+
+        if (list.length === 0) {
+          grid.innerHTML = ''; empty.style.display = 'block'; return;
+        }
+        empty.style.display = 'none';
+        grid.innerHTML = list.map(p => `
+          <a href="/blog/post.html?slug=${p.slug}" class="bcard rv">
+            <div class="bcard-body">
+              <div class="bcard-meta">
+                <span class="bcard-cat">${p.category}</span>
+                <span class="bcard-dot"></span>
+                <span class="bcard-date">${formatDate(p.date)}</span>
+                <span class="bcard-dot"></span>
+                <span class="bcard-read">${p.readTime} min read</span>
+              </div>
+              <div class="bcard-title">${p.title}</div>
+              <div class="bcard-excerpt">${p.excerpt}</div>
+            </div>
+            <div class="bcard-foot">
+              <span class="bcard-more">Read more <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6.5h9M7.5 3l3.5 3.5L7.5 10"/></svg></span>
+            </div>
+          </a>`).join('');
+
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.06 });
+        grid.querySelectorAll('.rv').forEach(el => io.observe(el));
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

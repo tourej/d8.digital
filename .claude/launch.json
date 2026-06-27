@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "d8-homepage",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3131"],
+      "port": 3131,
+      "autoPort": false
+    }
+  ]
+}

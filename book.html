@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Call | D8.Digital</title>
+  <meta name="description" content="Schedule a free 30-minute discovery call with D8.Digital. Pick a time that works for you.">
+  <link rel="canonical" href="https://d8.digital/book">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    /* ── Page layout ───────────────────────────────────────── */
+    .book-page {
+      min-height: 100svh;
+      padding: 7rem clamp(1.5rem, 5vw, 4rem) 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-page::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--green-g1) 0%, transparent 65%);
+      top: -100px; right: -200px;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glow 12s ease-in-out infinite alternate;
+    }
+
+    .book-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ────────────────────────────────────────────── */
+    .book-eyebrow {
+      font-size: .78rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: .75rem;
+    }
+    .book-h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: -.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .book-sub {
+      color: var(--ink2); font-size: 1rem;
+      max-width: 520px; margin-bottom: 3rem;
+    }
+
+    /* ── Step system ───────────────────────────────────────── */
+    .steps {
+      display: flex; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .step-pill {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .8rem; font-weight: 600; letter-spacing: .03em;
+      color: var(--ink3);
+      padding: .4rem .9rem;
+      border: 1px solid var(--rule);
+      border-radius: 100px;
+      transition: color .2s, border-color .2s;
+    }
+    .step-pill.active  { color: var(--green); border-color: var(--green-dim); }
+    .step-pill.done    { color: var(--ink2); border-color: var(--rule2); }
+    .step-num {
+      width: 18px; height: 18px;
+      background: var(--rule); color: var(--ink2);
+      border-radius: 50%; font-size: .7rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-pill.active .step-num { background: var(--green); color: var(--bg); }
+    .step-pill.done   .step-num { background: var(--green-muted); color: var(--green); }
+
+    /* ── Card shell ─────────────────────────────────────────── */
+    .book-card {
+      background: var(--bg2);
+      border: 1px solid var(--rule);
+      border-radius: 1.5rem;
+      padding: clamp(2rem, 4vw, 3rem);
+    }
+
+    /* ── Step panels ────────────────────────────────────────── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Date picker ────────────────────────────────────────── */
+    .calendar-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 640px) { .calendar-wrap { grid-template-columns: 1fr; } }
+
+    .cal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .cal-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem; font-weight: 800;
+    }
+    .cal-nav {
+      background: none; border: 1px solid var(--rule);
+      color: var(--ink2); width: 32px; height: 32px;
+      border-radius: 8px; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, color .15s;
+    }
+    .cal-nav:hover { border-color: var(--green); color: var(--green); }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-dow {
+      text-align: center; font-size: .7rem; font-weight: 600;
+      color: var(--ink3); padding: .3rem 0; letter-spacing: .05em;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .cal-day:not(.empty):not(.past):hover { background: var(--bg3); color: var(--green); }
+    .cal-day.empty, .cal-day.past { color: var(--ink3); cursor: default; pointer-events: none; }
+    .cal-day.today { color: var(--green); font-weight: 700; }
+    .cal-day.selected {
+      background: var(--green); color: var(--bg); font-weight: 700;
+    }
+
+    /* ── Time slots ─────────────────────────────────────────── */
+    .slots-title {
+      font-size: .85rem; font-weight: 600; color: var(--ink2);
+      margin-bottom: .75rem; letter-spacing: .03em;
+    }
+    .slots-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
+    }
+    .slot {
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: .6rem;
+      padding: .55rem .75rem;
+      font-size: .84rem; font-weight: 600;
+      cursor: pointer; text-align: center;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .slot:hover { border-color: var(--green-dim); color: var(--green); }
+    .slot.selected { background: var(--green); color: var(--bg); border-color: var(--green); }
+    .slot.busy { color: var(--ink3); background: transparent; cursor: not-allowed; text-decoration: line-through; }
+
+    .slots-empty {
+      color: var(--ink2); font-size: .88rem;
+      padding: 1.5rem 0; text-align: center;
+    }
+
+    /* ── Form ───────────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: .8rem; font-weight: 600; letter-spacing: .03em; color: var(--ink2);
+    }
+    input, select, textarea {
+      background: var(--bg3);
+      border: 1px solid var(--rule2);
+      border-radius: .6rem;
+      padding: .75rem 1rem;
+      color: var(--ink);
+      font-family: 'Archivo', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .15s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--green); }
+    textarea { resize: vertical; min-height: 90px; }
+    select option { background: var(--bg2); }
+
+    /* ── Summary box ────────────────────────────────────────── */
+    .summary-box {
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .sum-item { font-size: .85rem; }
+    .sum-label { color: var(--ink3); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .25rem; }
+    .sum-val { color: var(--ink); font-weight: 600; }
+
+    /* ── Buttons ────────────────────────────────────────────── */
+    .btn-row {
+      display: flex; gap: 1rem; align-items: center; margin-top: 2rem;
+    }
+    .btn-primary {
+      background: var(--green); color: var(--bg);
+      font-family: 'Archivo', sans-serif;
+      font-size: .9rem; font-weight: 700; letter-spacing: .01em;
+      padding: .8rem 2rem; border-radius: 100px;
+      border: none; cursor: pointer;
+      transition: transform .2s var(--eq), box-shadow .2s, opacity .15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--green-g2); }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-secondary {
+      background: none; color: var(--ink2);
+      font-family: 'Archivo', sans-serif;
+      font-size: .9rem; font-weight: 600;
+      padding: .8rem 1.5rem; border-radius: 100px;
+      border: 1px solid var(--rule2); cursor: pointer;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-secondary:hover { border-color: var(--ink2); color: var(--ink); }
+
+    /* ── Google sign-in banner ──────────────────────────────── */
+    .gcal-banner {
+      background: var(--bg3);
+      border: 1px solid var(--rule2);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .gcal-status-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .gcal-status-dot.connected { background: var(--green); }
+    .gcal-status-dot.disconnected { background: oklch(65% 0.18 30); }
+    .gcal-status-text { font-size: .85rem; color: var(--ink2); flex: 1; }
+    .gcal-status-text strong { color: var(--ink); }
+    .btn-gcal {
+      background: var(--bg2); color: var(--ink);
+      font-family: 'Archivo', sans-serif;
+      font-size: .8rem; font-weight: 600;
+      padding: .5rem 1.1rem; border-radius: 100px;
+      border: 1px solid var(--rule2); cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-gcal:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── Confirmation screen ────────────────────────────────── */
+    .confirm-screen { text-align: center; padding: 2rem 0; }
+    .confirm-icon {
+      width: 72px; height: 72px;
+      background: var(--green-g2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 1.5rem;
+    }
+    .confirm-h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.75rem; font-weight: 800;
+      letter-spacing: -.03em; margin-bottom: .75rem;
+    }
+    .confirm-p { color: var(--ink2); max-width: 440px; margin: 0 auto 2rem; }
+    .confirm-details {
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      max-width: 440px; margin: 0 auto 2rem;
+      text-align: left;
+    }
+    .confirm-row {
+      display: flex; gap: 1rem; align-items: flex-start;
+      font-size: .88rem; padding: .5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .confirm-row:last-child { border-bottom: none; }
+    .confirm-row-label { color: var(--ink3); width: 80px; flex-shrink: 0; font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; padding-top: .1em; }
+    .confirm-row-val { color: var(--ink); font-weight: 600; }
+
+    /* ── Loading overlay ────────────────────────────────────── */
+    .loading-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 500;
+      background: oklch(7.5% 0.009 145 / 0.75);
+      backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+    }
+    .loading-overlay.show { display: flex; }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid var(--rule2);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: var(--ink2); font-size: .9rem; }
+
+    /* ── Error ──────────────────────────────────────────────── */
+    .err-msg {
+      background: oklch(20% 0.05 30);
+      border: 1px solid oklch(55% 0.18 30 / 0.5);
+      border-radius: .6rem;
+      padding: .75rem 1rem;
+      font-size: .85rem; color: oklch(80% 0.08 30);
+      margin-top: 1rem; display: none;
+    }
+    .err-msg.show { display: block; }
+  </style>
+</head>
+<body>
+  <div id="cur"   class="cur"     aria-hidden="true"></div>
+  <div id="curR"  class="cur-ring" aria-hidden="true"></div>
+
+  <div id="nav-mount"></div>
+
+  <main class="book-page">
+    <div class="book-inner">
+
+      <p class="book-eyebrow rv">Schedule a Call</p>
+      <h1 class="book-h1 rv">Let's talk about<br>your project.</h1>
+      <p class="book-sub rv">Book a free 30-minute discovery call. Pick a time that works for you and you'll get a calendar invite with video call link immediately after booking.</p>
+
+      <!-- Step indicators -->
+      <div class="steps rv" id="steps">
+        <div class="step-pill active" data-step="2"><span class="step-num">1</span> Date &amp; Time</div>
+        <div class="step-pill" data-step="3"><span class="step-num">2</span> Your Details</div>
+      </div>
+
+      <!-- Google Calendar connection banner -->
+      <div class="gcal-banner rv" id="gcalBanner">
+        <div class="gcal-status-dot disconnected" id="gcalDot"></div>
+        <div class="gcal-status-text" id="gcalText">
+          <strong>Connect Google Calendar</strong> to check real availability and create events automatically.
+        </div>
+        <button class="btn-gcal" id="gcalBtn" onclick="signInGoogle()">Connect</button>
+      </div>
+
+      <div class="book-card rv">
+
+        <!-- ── Panel 2: Date & time ──────────────────────── -->
+        <div class="panel active" id="panel2">
+          <div class="calendar-wrap">
+            <!-- Calendar -->
+            <div>
+              <div class="cal-header">
+                <button class="cal-nav" onclick="shiftMonth(-1)">‹</button>
+                <div class="cal-title" id="calTitle"></div>
+                <button class="cal-nav" onclick="shiftMonth(1)">›</button>
+              </div>
+              <div class="cal-grid" id="calGrid"></div>
+            </div>
+            <!-- Time slots -->
+            <div>
+              <div class="slots-title" id="slotsTitle">Select a date to see available times</div>
+              <div class="slots-grid" id="slotsGrid"></div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:2rem">
+            <button class="btn-primary" id="btn2Next" onclick="goStep(3)" disabled>Continue →</button>
+          </div>
+        </div>
+
+        <!-- ── Panel 3: Your details ─────────────────────── -->
+        <div class="panel" id="panel3">
+
+          <!-- Summary -->
+          <div class="summary-box" id="summaryBox"></div>
+
+          <form id="bookForm" onsubmit="submitBooking(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fname">First name</label>
+                <input type="text" id="fname" name="fname" required placeholder="Alex">
+              </div>
+              <div class="form-group">
+                <label for="lname">Last name</label>
+                <input type="text" id="lname" name="lname" required placeholder="Rivera">
+              </div>
+              <div class="form-group full">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required placeholder="alex@company.com">
+              </div>
+              <div class="form-group full">
+                <label for="company">Company / Project name</label>
+                <input type="text" id="company" name="company" placeholder="Acme Inc. (optional)">
+              </div>
+              <div class="form-group full">
+                <label for="notes">What would you like to discuss?</label>
+                <textarea id="notes" name="notes" placeholder="Tell us a bit about your project or what you'd like to cover on the call…"></textarea>
+              </div>
+            </div>
+            <div class="err-msg" id="errMsg"></div>
+            <div class="btn-row">
+              <button class="btn-secondary" type="button" onclick="goStep(2)">← Back</button>
+              <button class="btn-primary" type="submit" id="btnBook">Book My Call →</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ── Panel 4: Confirmation ─────────────────────── -->
+        <div class="panel" id="panel4">
+          <div class="confirm-screen">
+            <div class="confirm-icon">✅</div>
+            <h2 class="confirm-h2">You're booked!</h2>
+            <p class="confirm-p">A calendar invite with your video call link has been sent to your email. We're looking forward to talking.</p>
+            <div class="confirm-details" id="confirmDetails"></div>
+            <a href="/" class="btn-primary" style="display:inline-block;text-decoration:none">← Back to D8.Digital</a>
+          </div>
+        </div>
+
+      </div><!-- .book-card -->
+    </div><!-- .book-inner -->
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Creating your event…</div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────
+       CONFIGURATION, update these values before going live
+  ──────────────────────────────────────────────────────────── -->
+  <script>
+    /* ── ✏️  CONFIG, edit these ───────────────────────────── */
+    const CONFIG = {
+      // Your Google OAuth 2.0 Client ID
+      // Create one at: https://console.cloud.google.com/apis/credentials
+      // Authorized redirect URIs must include your domain + /book.html
+      GOOGLE_CLIENT_ID: 'YOUR_GOOGLE_CLIENT_ID_HERE',
+
+      // Your Google Calendar ID (usually your Gmail address)
+      CALENDAR_ID: 'primary',
+
+      // Your name shown in calendar invites
+      HOST_NAME: 'D8.Digital',
+
+      // Your email, added as organizer / co-attendee
+      HOST_EMAIL: 'hello@d8.digital',
+
+      // Video call link sent in invite (replace with Google Meet, Zoom, etc.)
+      // Leave empty to omit, or use a fixed Zoom personal room URL
+      CALL_LINK: 'https://meet.google.com/',  // will be auto-generated by Calendar API when blank
+
+      // Timezone for displaying slots (IANA format)
+      TIMEZONE: 'America/Chicago',
+
+      // Available hours (24h), Monday–Friday only
+      DAY_START: 9,   // 9 AM
+      DAY_END:   17,  // 5 PM
+
+      // Slot interval in minutes (granularity of time picker)
+      SLOT_INTERVAL: 30,
+    };
+    /* ── end config ─────────────────────────────────────────── */
+  </script>
+
+  <!-- Google Identity Services (OAuth 2.0 PKCE) -->
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <!-- Google API client (Calendar) -->
+  <script src="https://apis.google.com/js/api.js" async onload="gapiLoaded()"></script>
+
+  <script>
+  /* ════════════════════════════════════════════════════════════
+     State
+  ════════════════════════════════════════════════════════════ */
+  const state = {
+    step: 2,
+    meetingType: 'discovery',
+    meetingDur: 30,
+    selectedDate: null,   // Date object
+    selectedSlot: null,   // '09:00'
+    busySlots: [],        // fetched from Google Calendar
+    gapiReady: false,
+    gisReady: false,
+    accessToken: null,
+    calendarLoaded: false,
+  };
+
+  /* Months */
+  let calYear  = new Date().getFullYear();
+  let calMonth = new Date().getMonth();
+
+  /* ════════════════════════════════════════════════════════════
+     Step navigation
+  ════════════════════════════════════════════════════════════ */
+  function goStep(n) {
+    document.getElementById('panel' + state.step).classList.remove('active');
+    document.getElementById('panel' + n).classList.add('active');
+
+    document.querySelectorAll('.step-pill').forEach(p => {
+      const s = +p.dataset.step;
+      p.classList.toggle('active', s === n);
+      p.classList.toggle('done', s < n);
+    });
+
+    state.step = n;
+
+    if (n === 3) renderSummary();
+  }
+
+  // Load calendar on page load since we start at step 2
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCalendar();
+    state.calendarLoaded = true;
+  });
+
+  /* ════════════════════════════════════════════════════════════
+     Calendar render
+  ════════════════════════════════════════════════════════════ */
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const MONTHS = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+
+  function renderCalendar() {
+    const title = document.getElementById('calTitle');
+    const grid  = document.getElementById('calGrid');
+    title.textContent = MONTHS[calMonth] + ' ' + calYear;
+
+    grid.innerHTML = DAYS.map(d => `<div class="cal-dow">${d}</div>`).join('');
+
+    const first  = new Date(calYear, calMonth, 1).getDay();
+    const daysIn = new Date(calYear, calMonth + 1, 0).getDate();
+    const today  = new Date(); today.setHours(0,0,0,0);
+
+    for (let i = 0; i < first; i++) grid.innerHTML += `<div class="cal-day empty"></div>`;
+
+    for (let d = 1; d <= daysIn; d++) {
+      const dt   = new Date(calYear, calMonth, d);
+      const dow  = dt.getDay();
+      const past = dt < today;
+      const weekend = dow === 0 || dow === 6;
+      let cls = 'cal-day';
+      if (past || weekend)          cls += ' past';
+      if (dt.getTime() === today.getTime()) cls += ' today';
+      if (state.selectedDate && dt.toDateString() === state.selectedDate.toDateString()) cls += ' selected';
+
+      grid.innerHTML += `<div class="${cls}" data-d="${d}" onclick="selectDay(${d})">${d}</div>`;
+    }
+  }
+
+  function shiftMonth(dir) {
+    calMonth += dir;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0)  { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  function selectDay(d) {
+    state.selectedDate = new Date(calYear, calMonth, d);
+    state.selectedSlot = null;
+    document.getElementById('btn2Next').disabled = true;
+    renderCalendar();
+    loadSlots();
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     Time slots
+  ════════════════════════════════════════════════════════════ */
+  function allSlotsForDay(date) {
+    const slots = [];
+    for (let h = CONFIG.DAY_START; h < CONFIG.DAY_END; h++) {
+      for (let m = 0; m < 60; m += CONFIG.SLOT_INTERVAL) {
+        slots.push(pad(h) + ':' + pad(m));
+      }
+    }
+    return slots;
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function formatSlot(s) {
+    const [h, m] = s.split(':').map(Number);
+    const ampm = h < 12 ? 'AM' : 'PM';
+    const h12  = h % 12 || 12;
+    return h12 + ':' + pad(m) + ' ' + ampm;
+  }
+
+  async function loadSlots() {
+    const grid = document.getElementById('slotsGrid');
+    const title = document.getElementById('slotsTitle');
+    const date = state.selectedDate;
+
+    title.textContent = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    grid.innerHTML = '<div class="slots-empty">Loading…</div>';
+
+    // Fetch busy times from Google Calendar if connected
+    if (state.accessToken) {
+      await fetchBusy(date);
+    }
+
+    const slots = allSlotsForDay(date);
+    const now   = new Date();
+
+    grid.innerHTML = slots.map(slot => {
+      const [h, m] = slot.split(':').map(Number);
+      const slotDt = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
+      const isPast = slotDt <= now;
+      const isBusy = state.busySlots.includes(slot);
+      const isSelected = state.selectedSlot === slot;
+
+      if (isPast || isBusy) {
+        return `<div class="slot busy">${formatSlot(slot)}</div>`;
+      }
+      return `<div class="slot${isSelected ? ' selected' : ''}" onclick="selectSlot('${slot}', this)">${formatSlot(slot)}</div>`;
+    }).join('');
+
+    if (slots.length === 0) {
+      grid.innerHTML = '<div class="slots-empty">No available times this day.</div>';
+    }
+  }
+
+  function selectSlot(slot, el) {
+    document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+    state.selectedSlot = slot;
+    document.getElementById('btn2Next').disabled = false;
+  }
+
+  async function fetchBusy(date) {
+    try {
+      const start = new Date(date); start.setHours(0,0,0,0);
+      const end   = new Date(date); end.setHours(23,59,59,999);
+
+      const resp = await gapi.client.calendar.freebusy.query({
+        timeMin: start.toISOString(),
+        timeMax: end.toISOString(),
+        items: [{ id: CONFIG.CALENDAR_ID }],
+      });
+      const busy = resp.result.calendars[CONFIG.CALENDAR_ID]?.busy || [];
+      state.busySlots = [];
+      busy.forEach(period => {
+        const ps = new Date(period.start);
+        const pe = new Date(period.end);
+        // Mark any slot that overlaps the busy period
+        const slots = allSlotsForDay(date);
+        slots.forEach(slot => {
+          const [h, m] = slot.split(':').map(Number);
+          const slotStart = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
+          const slotEnd   = new Date(slotStart.getTime() + state.meetingDur * 60000);
+          if (slotStart < pe && slotEnd > ps) state.busySlots.push(slot);
+        });
+      });
+    } catch (e) {
+      console.warn('Could not fetch busy times:', e);
+    }
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     Summary
+  ════════════════════════════════════════════════════════════ */
+  const MEETING_LABELS = {
+    discovery: 'Discovery Call',
+    strategy:  'Strategy Session',
+    project:   'Project Kickoff',
+    checkin:   'Quick Check-In',
+  };
+
+  function renderSummary() {
+    const box = document.getElementById('summaryBox');
+    const dateStr = state.selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+      timeZone: CONFIG.TIMEZONE,
+    });
+    box.innerHTML = `
+      <div class="sum-item"><div class="sum-label">Meeting</div><div class="sum-val">Discovery Call · 30 min</div></div>
+      <div class="sum-item"><div class="sum-label">Date</div><div class="sum-val">${dateStr}</div></div>
+      <div class="sum-item"><div class="sum-label">Time</div><div class="sum-val">${formatSlot(state.selectedSlot)} CT</div></div>
+    `;
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     Booking submission
+  ════════════════════════════════════════════════════════════ */
+  async function submitBooking(e) {
+    e.preventDefault();
+    const err = document.getElementById('errMsg');
+    err.classList.remove('show');
+
+    const fname   = document.getElementById('fname').value.trim();
+    const lname   = document.getElementById('lname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const notes   = document.getElementById('notes').value.trim();
+
+    showLoading('Creating your calendar event…');
+
+    try {
+      if (state.accessToken) {
+        await createCalendarEvent({ fname, lname, email, company, notes });
+      } else {
+        // Fallback: send via mailto (if not connected to Google Calendar)
+        sendMailtoFallback({ fname, lname, email, company, notes });
+      }
+      showConfirmation({ fname, lname, email, company });
+    } catch (ex) {
+      hideLoading();
+      err.textContent = 'Something went wrong: ' + (ex.message || ex);
+      err.classList.add('show');
+    }
+  }
+
+  async function createCalendarEvent({ fname, lname, email, company, notes }) {
+    const [h, m] = state.selectedSlot.split(':').map(Number);
+    const start = new Date(
+      state.selectedDate.getFullYear(),
+      state.selectedDate.getMonth(),
+      state.selectedDate.getDate(),
+      h, m
+    );
+    const end = new Date(start.getTime() + state.meetingDur * 60000);
+
+    const summary = `${MEETING_LABELS[state.meetingType]}, ${fname} ${lname}${company ? ' (' + company + ')' : ''}`;
+    const description = [
+      `Meeting Type: ${MEETING_LABELS[state.meetingType]}`,
+      `Duration: ${state.meetingDur} minutes`,
+      company ? `Company: ${company}` : '',
+      notes   ? `\nNotes from ${fname}:\n${notes}` : '',
+      '\nBooked via D8.Digital',
+    ].filter(Boolean).join('\n');
+
+    const event = {
+      summary,
+      description,
+      start: {
+        dateTime: start.toISOString(),
+        timeZone: CONFIG.TIMEZONE,
+      },
+      end: {
+        dateTime: end.toISOString(),
+        timeZone: CONFIG.TIMEZONE,
+      },
+      attendees: [
+        { email: CONFIG.HOST_EMAIL, displayName: CONFIG.HOST_NAME },
+        { email, displayName: `${fname} ${lname}` },
+      ],
+      conferenceData: {
+        createRequest: {
+          requestId: Date.now().toString(),
+          conferenceSolutionKey: { type: 'hangoutsMeet' },
+        },
+      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: 'email',  minutes: 24 * 60 },
+          { method: 'popup',  minutes: 30 },
+        ],
+      },
+      sendUpdates: 'all',
+    };
+
+    const resp = await gapi.client.calendar.events.insert({
+      calendarId: CONFIG.CALENDAR_ID,
+      conferenceDataVersion: 1,
+      sendNotifications: true,
+      resource: event,
+    });
+
+    return resp.result;
+  }
+
+  function sendMailtoFallback({ fname, lname, email, company, notes }) {
+    // Graceful fallback when not connected: open mailto to host
+    const dateStr = state.selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+    });
+    const subject = encodeURIComponent(`Booking Request: ${MEETING_LABELS[state.meetingType]}, ${fname} ${lname}`);
+    const body = encodeURIComponent(
+      `Name: ${fname} ${lname}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n` +
+      `Meeting: ${MEETING_LABELS[state.meetingType]} (${state.meetingDur} min)\n` +
+      `Date: ${dateStr} at ${formatSlot(state.selectedSlot)} CT\n\nNotes: ${notes || 'None'}`
+    );
+    window.open(`mailto:${CONFIG.HOST_EMAIL}?subject=${subject}&body=${body}`);
+  }
+
+  function showConfirmation({ fname, lname, email }) {
+    hideLoading();
+    const dateStr = state.selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+    });
+    document.getElementById('confirmDetails').innerHTML = `
+      <div class="confirm-row"><span class="confirm-row-label">Name</span><span class="confirm-row-val">${fname} ${lname}</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Email</span><span class="confirm-row-val">${email}</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Type</span><span class="confirm-row-val">${MEETING_LABELS[state.meetingType]}</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Date</span><span class="confirm-row-val">${dateStr}</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-val">${formatSlot(state.selectedSlot)} CT</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Duration</span><span class="confirm-row-val">${state.meetingDur} min</span></div>
+    `;
+
+    // Hide step indicators on confirmation
+    document.getElementById('steps').style.display = 'none';
+
+    goStep(4);
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     Loading
+  ════════════════════════════════════════════════════════════ */
+  function showLoading(msg) {
+    document.getElementById('loadingText').textContent = msg || 'Loading…';
+    document.getElementById('loadingOverlay').classList.add('show');
+  }
+  function hideLoading() {
+    document.getElementById('loadingOverlay').classList.remove('show');
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     Google Auth
+  ════════════════════════════════════════════════════════════ */
+  let tokenClient;
+
+  function gapiLoaded() {
+    gapi.load('client', async () => {
+      await gapi.client.init({});
+      await gapi.client.load('https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest');
+      state.gapiReady = true;
+      maybeInitGis();
+    });
+  }
+
+  function maybeInitGis() {
+    // Wait until GIS script has also loaded
+    if (typeof google === 'undefined' || !google.accounts) {
+      setTimeout(maybeInitGis, 200);
+      return;
+    }
+    tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: CONFIG.GOOGLE_CLIENT_ID,
+      scope: 'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.readonly',
+      callback: (tokenResp) => {
+        if (tokenResp.error) {
+          console.error('Auth error:', tokenResp);
+          return;
+        }
+        state.accessToken = tokenResp.access_token;
+        gapi.client.setToken({ access_token: tokenResp.access_token });
+        updateGCalBanner(true);
+        // Refresh slots if a date is already selected
+        if (state.selectedDate) loadSlots();
+      },
+    });
+    state.gisReady = true;
+  }
+
+  function signInGoogle() {
+    if (!state.gapiReady || !state.gisReady) {
+      alert('Google APIs are still loading. Please try again in a moment.');
+      return;
+    }
+    if (CONFIG.GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID_HERE') {
+      alert('⚠️ Please add your Google Client ID in the CONFIG block of book.html before testing OAuth.');
+      return;
+    }
+    tokenClient.requestAccessToken({ prompt: 'consent' });
+  }
+
+  function updateGCalBanner(connected) {
+    const dot  = document.getElementById('gcalDot');
+    const text = document.getElementById('gcalText');
+    const btn  = document.getElementById('gcalBtn');
+    dot.className  = 'gcal-status-dot ' + (connected ? 'connected' : 'disconnected');
+    text.innerHTML = connected
+      ? '<strong>Google Calendar connected</strong>, availability is live and events will be created automatically.'
+      : '<strong>Connect Google Calendar</strong> to check real availability and create events automatically.';
+    btn.textContent = connected ? 'Connected ✓' : 'Connect';
+    btn.disabled    = connected;
+  }
+  </script>
+
+  <script src="/shared/components.js"></script>
+</body>
+</html>

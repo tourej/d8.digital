@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | D8.Digital | Houston Branding, Web Design &amp; SEO</title>
+  <meta name="description" content="Custom branding, web design, SEO, eCommerce, and digital marketing for ambitious businesses. Houston, TX and Manila, PH.">
+  <meta property="og:title" content="Services, D8.Digital | Houston Branding, Web Design &amp; SEO">
+  <meta property="og:description" content="Custom branding, web design, SEO, eCommerce, and digital marketing. No templates. Just results.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://d8.digital/services.html">
+  <link rel="canonical" href="https://d8.digital/services.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    /* ── Services list ──────────────────────────────────────── */
+    .svc-row {
+      display: grid;
+      grid-template-columns: 7rem 1fr 1fr;
+      gap: 3rem;
+      padding: clamp(2.5rem, 4vw, 3.5rem) 0;
+      border-top: 1px solid var(--rule);
+      align-items: start;
+    }
+    .svc-row:last-child { border-bottom: 1px solid var(--rule); }
+    .svc-num { font-size: .72rem; font-weight: 600; color: var(--ink3); letter-spacing: .06em; padding-top: .25rem; }
+    .svc-name {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+      font-weight: 800; letter-spacing: -.03em; line-height: 1.08;
+      margin-bottom: 1rem;
+    }
+    .svc-tag {
+      display: inline-block;
+      background: var(--green-muted); color: var(--green);
+      font-size: .7rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .3rem .875rem; border-radius: 100px;
+    }
+    .svc-desc { color: var(--ink2); font-size: 1rem; line-height: 1.72; margin-bottom: 1.75rem; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+    .svc-list li {
+      display: flex; align-items: flex-start; gap: .75rem;
+      color: var(--ink2); font-size: .9rem; line-height: 1.55;
+    }
+    .svc-list li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%; background: var(--ink3);
+      margin-top: .45rem;
+    }
+
+    /* ── Process ────────────────────────────────────────────── */
+    .process-h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 800; line-height: .93; letter-spacing: -.042em;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; position: relative;
+    }
+    .process-grid::before {
+      content: ''; position: absolute;
+      top: 1.375rem;
+      left: calc(12.5% + 1.375rem); right: calc(12.5% + 1.375rem);
+      height: 1px; background: var(--rule2); z-index: 0;
+    }
+    .process-step { padding: 0 1.5rem 0 0; position: relative; z-index: 1; }
+    .process-step:last-child { padding-right: 0; }
+    .step-num {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%;
+      background: var(--bg2); border: 1.5px solid var(--rule2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Archivo', sans-serif;
+      font-size: .75rem; font-weight: 800; color: var(--green); letter-spacing: .04em;
+      margin-bottom: 1.75rem;
+    }
+    .process-step.active .step-num { background: var(--green); color: var(--bg); border-color: var(--green); }
+    .step-name { font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .625rem; }
+    .step-desc { color: var(--ink2); font-size: .875rem; line-height: 1.65; }
+
+    /* ── Differentiator ─────────────────────────────────────── */
+    .diff-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .diff-h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+      font-weight: 800; line-height: .95; letter-spacing: -.04em;
+    }
+    .diff-body { color: var(--ink2); font-size: 1.025rem; line-height: 1.72; margin-bottom: 2rem; }
+    .diff-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; margin-bottom: 2.5rem; }
+    .diff-stat-n { font-family: 'Archivo', sans-serif; font-size: 2.75rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; margin-bottom: .375rem; }
+    .diff-stat-l { color: var(--ink2); font-size: .825rem; line-height: 1.5; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .svc-row { grid-template-columns: 5rem 1fr; gap: 2rem; }
+      .svc-row > *:last-child { grid-column: 2; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .process-grid::before { display: none; }
+      .diff-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 640px) {
+      .svc-row { grid-template-columns: 1fr; gap: 1.25rem; }
+      .svc-num { display: none; }
+      .process-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cur"  id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+
+  <div id="nav-mount"></div>
+
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="hero-inner">
+      <h1 class="page-h1">
+        <span class="ln"><span class="ln-in">What We</span></span>
+        <span class="ln"><span class="ln-in g">Offer.</span></span>
+      </h1>
+      <p class="page-hero-sub">From first impression to loyal customer, we engineer every touchpoint of your brand's digital presence. No templates. No recycled solutions. Just work built for your business.</p>
+    </div>
+  </header>
+
+  <!-- SERVICES LIST -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+
+      <div class="svc-row rv">
+        <div class="svc-num">01</div>
+        <div>
+          <h2 class="svc-name">Branding &amp;<br>Identity</h2>
+          <span class="svc-tag">Foundation</span>
+        </div>
+        <div>
+          <p class="svc-desc">Your brand is more than a logo. It's the story you tell before you speak, the feeling customers carry after they leave, and the reason they come back. We build brand identities that communicate who you are with clarity and conviction.</p>
+          <ul class="svc-list">
+            <li>Logo design and wordmark systems</li>
+            <li>Color palette and visual language</li>
+            <li>Typography selection and hierarchy</li>
+            <li>Brand guidelines and usage rules</li>
+            <li>Business cards, stationery, and collateral</li>
+            <li>Brand voice and messaging strategy</li>
+          </ul>
+          <a href="/services/branding.html" class="btn-ghost" style="margin-top:1.25rem">Explore Branding <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="svc-row rv">
+        <div class="svc-num">02</div>
+        <div>
+          <h2 class="svc-name">Web Design &amp;<br>Development</h2>
+          <span class="svc-tag">Digital Presence</span>
+        </div>
+        <div>
+          <p class="svc-desc">Your website is your hardest-working team member. It runs 24/7, answers every question, and closes deals while you sleep. We build custom sites engineered for speed, conversion, and brand impact. Not a template in sight.</p>
+          <ul class="svc-list">
+            <li>Custom website design and UX</li>
+            <li>Responsive development for all devices</li>
+            <li>eCommerce stores (Shopify, WooCommerce)</li>
+            <li>Landing pages optimized for conversion</li>
+            <li>CMS integration for easy content management</li>
+            <li>Performance optimization and Core Web Vitals</li>
+          </ul>
+          <a href="/services/web-design-houston.html" class="btn-ghost" style="margin-top:1.25rem">Explore Web Design <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="svc-row rv">
+        <div class="svc-num">03</div>
+        <div>
+          <h2 class="svc-name">SEO &amp;<br>Organic Growth</h2>
+          <span class="svc-tag">Long-Term Growth</span>
+        </div>
+        <div>
+          <p class="svc-desc">Paid ads stop the moment you stop paying. SEO compounds. We build search strategies that grow your visibility month over month, driving qualified traffic from Houston, the Philippines, and beyond without burning your ad budget.</p>
+          <ul class="svc-list">
+            <li>Technical SEO audits and implementation</li>
+            <li>On-page optimization and content structure</li>
+            <li>Local and national SEO strategies</li>
+            <li>Keyword strategy and content planning</li>
+            <li>Backlink development and authority building</li>
+            <li>Monthly reporting and performance tracking</li>
+          </ul>
+          <a href="/services/seo-houston.html" class="btn-ghost" style="margin-top:1.25rem">Explore SEO Services <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="svc-row rv">
+        <div class="svc-num">04</div>
+        <div>
+          <h2 class="svc-name">Hosting &amp;<br>Maintenance</h2>
+          <span class="svc-tag">Ongoing Support</span>
+        </div>
+        <div>
+          <p class="svc-desc">A neglected website is a liability. Outdated plugins, slow load times, and security gaps cost you customers every day. Our managed hosting keeps your site fast, secure, and up to date so you can focus on running your business.</p>
+          <ul class="svc-list">
+            <li>Managed cloud hosting with 99.9% uptime</li>
+            <li>Security monitoring and malware protection</li>
+            <li>Automated backups and disaster recovery</li>
+            <li>Plugin and CMS updates</li>
+            <li>Performance optimization and caching</li>
+            <li>Content updates and ongoing support</li>
+          </ul>
+          <a href="/services/hosting-maintenance.html" class="btn-ghost" style="margin-top:1.25rem">View Care Plans &amp; Pricing <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="svc-row rv">
+        <div class="svc-num">05</div>
+        <div>
+          <h2 class="svc-name">eCommerce<br>Solutions</h2>
+          <span class="svc-tag">Sell Online</span>
+        </div>
+        <div>
+          <p class="svc-desc">Selling online is competitive. The difference between a store that converts and one that doesn't is design, trust, and speed. We build eCommerce experiences that make buying easy and coming back natural.</p>
+          <ul class="svc-list">
+            <li>Shopify and WooCommerce builds</li>
+            <li>Product page design optimized for conversion</li>
+            <li>Payment gateway integration</li>
+            <li>Inventory and order management setup</li>
+            <li>Mobile-first shopping experience</li>
+            <li>Ongoing optimization and A/B testing guidance</li>
+          </ul>
+          <a href="/services/ecommerce.html" class="btn-ghost" style="margin-top:1.25rem">Explore eCommerce <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="svc-row rv">
+        <div class="svc-num">06</div>
+        <div>
+          <h2 class="svc-name">Digital Marketing<br>Consulting</h2>
+          <span class="svc-tag">Strategy &amp; Growth</span>
+        </div>
+        <div>
+          <p class="svc-desc">Tactics without strategy is noise. We work with business owners to build marketing plans that align with their goals, budget, and capacity. You get a roadmap you can actually execute, not a 60-page deck that collects dust.</p>
+          <ul class="svc-list">
+            <li>Digital marketing strategy and planning</li>
+            <li>Social media channel strategy and guidance</li>
+            <li>Email marketing setup and automation</li>
+            <li>Analytics setup and goal tracking</li>
+            <li>Campaign planning and ad strategy</li>
+            <li>Monthly strategy calls and performance reviews</li>
+          </ul>
+          <a href="/services/digital-marketing.html" class="btn-ghost" style="margin-top:1.25rem">Explore Digital Marketing <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FLAGSHIP PACKAGE -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="rv" style="border:1.5px solid var(--green-dim);border-radius:1rem;padding:3rem;display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:space-between">
+        <div style="flex:1;min-width:260px">
+          <div class="lbl" style="margin-bottom:.75rem">Featured Package</div>
+          <h2 style="font-family:'Sora',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1rem">SEO-Ready Website Build</h2>
+          <p style="color:var(--ink2);font-size:1rem;line-height:1.7;max-width:520px">Custom web design and local SEO bundled into one engagement. Your site launches fast, ranks in Google, and converts visitors into leads, without stitching together two separate vendors.</p>
+        </div>
+        <a href="/seo-website-build.html" class="btn-fill" style="flex-shrink:0">See What's Included <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="lbl rv">How It Works</div>
+      <h2 class="process-h2 rv">Our Process,<br><span class="g">Simplified.</span></h2>
+      <div class="process-grid">
+        <div class="process-step active rv">
+          <div class="step-num">01</div>
+          <div class="step-name">Consult &amp; Discover</div>
+          <p class="step-desc">We start with a free strategy session to understand your business, goals, and where you want to go. No assumptions, no packages forced on you.</p>
+        </div>
+        <div class="process-step rv d1">
+          <div class="step-num">02</div>
+          <div class="step-name">Create &amp; Present</div>
+          <p class="step-desc">We design and develop your solution, presenting it for your feedback. You're involved at every key decision so there are no surprises at launch.</p>
+        </div>
+        <div class="process-step rv d2">
+          <div class="step-num">03</div>
+          <div class="step-name">Refine &amp; Launch</div>
+          <p class="step-desc">We incorporate your feedback, finalize every detail, and launch. Every deliverable goes through quality checks before it ever reaches you.</p>
+        </div>
+        <div class="process-step rv d3">
+          <div class="step-num">04</div>
+          <div class="step-name">Maintain &amp; Grow</div>
+          <p class="step-desc">The relationship doesn't end at launch. We offer ongoing support, optimization, and strategy to keep your brand growing month over month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATOR -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="diff-inner">
+        <div>
+          <div class="lbl rv">Why D8.Digital</div>
+          <h2 class="diff-h2 rv">An Anomaly<br>in a World of<br><span class="g">Templates.</span></h2>
+        </div>
+        <div class="rv d1">
+          <p class="diff-body">Most agencies sell you a package and drop a template on your lap. We don't work that way. Every project we take on is built from scratch, rooted in your brand, and designed to perform in your market. We're a small team with big-agency capability and boutique-level attention.</p>
+          <div class="diff-stats">
+            <div>
+              <div class="diff-stat-n">50<span class="g">+</span></div>
+              <div class="diff-stat-l">brands elevated and growing</div>
+            </div>
+            <div>
+              <div class="diff-stat-n">100<span class="g">%</span></div>
+              <div class="diff-stat-l">Custom work, never a template used</div>
+            </div>
+            <div>
+              <div class="diff-stat-n">2</div>
+              <div class="diff-stat-l">Offices: Houston, TX and Manila, PH</div>
+            </div>
+            <div>
+              <div class="diff-stat-n">3<span class="g">x</span></div>
+              <div class="diff-stat-l">Average organic traffic lift in 6 months</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:.875rem;flex-wrap:wrap;">
+            <a href="#contact" class="btn-fill">Start Your Project <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+            <a href="/about.html" class="btn-ghost">About the Team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contact" style="background:var(--bg2)">
+    <div class="cta-inner">
+      <div class="lbl rv" style="justify-content:center">Let's Build Something</div>
+      <h2 class="cta-h2 rv">Ready to<br>Get Started<span class="g">?</span></h2>
+      <p class="cta-sub rv d1">Book a free 30-minute strategy session. We'll figure out exactly which services fit your goals and show you what results look like for a business like yours.</p>
+      <div class="rv d2">
+        <a href="/book.html" class="btn-fill">Schedule Your Free Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="/shared/components.js"></script>
+</body>
+</html>

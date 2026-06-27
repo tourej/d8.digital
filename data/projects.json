@@ -1,0 +1,232 @@
+{
+  "projects": [
+    {
+      "id": "global-ultrasound-institute",
+      "slug": "global-ultrasound-institute",
+      "title": "Global Ultrasound Institute",
+      "category": "Healthcare & MedTech",
+      "tags": ["Digital Strategy", "Web Design", "SEO", "Marketing Automation"],
+      "featured": true,
+      "art": "art-gusi",
+      "excerpt": "Led global digital strategy for a medical education platform expanding point-of-care ultrasound training to 30+ countries.",
+      "hero_tagline": "800% more traffic. 30+ countries reached.",
+      "challenge": "Global Ultrasound Institute (GUSI) trains clinicians, educators, and institutional partners worldwide in point-of-care ultrasound. Their digital presence wasn't built for global scale, fragmented messaging, a website that didn't reflect their authority, and marketing operations that couldn't keep up with international demand. They needed a partner who could lead strategy from the top down, not just execute individual campaigns.",
+      "solution": "We led the end-to-end redesign and launch of the new GUSI website, built around user experience, SEO best practices, and automated workflows that reduced manual effort across the team. We defined and executed content strategy across email, social, and digital channels to engage clinicians, educators, and institutional partners. Marketing automation and CRM integrations were implemented to improve lead capture, nurturing, and handoff to their sales and education teams. Internationally, we coordinated co-marketing partnerships and aligned regional campaigns to global objectives.",
+      "results": [
+        "<strong>800%+ increase</strong> in site traffic within 2–3 months of launch",
+        "Global reach expanded across <strong>30+ countries</strong> through coordinated digital and co-marketing strategy",
+        "Marketing automation and CRM fully integrated, reducing manual lead handling and improving sales handoff"
+      ],
+      "testimonial": null,
+      "next": "carla-carlisle"
+    },
+    {
+      "id": "carla-carlisle",
+      "slug": "carla-carlisle",
+      "title": "Carla A. Carlisle",
+      "category": "Publishing & Advocacy",
+      "tags": ["Web Design", "Branding", "Strategy"],
+      "featured": true,
+      "art": "art-carlisle",
+      "excerpt": "TEDx speaker, mental health advocate, and author of multiple books. We built her platform, then helped her grow it.",
+      "hero_tagline": "A platform as powerful as her purpose.",
+      "challenge": "Carla A. Carlisle had the credentials, the mission, and the published books, but her first website didn't do justice to the depth of her work. As a TEDx speaker, mental health advocate, and published author, she needed a digital home that unified her identity across books, speaking engagements, and her organization, The Compassionate Companion. First impressions weren't matching the impact she was making in person.",
+      "solution": "We built her first website from scratch, then fully redesigned it as her brand and body of work grew. We brought clarity to a multi-faceted platform, author, speaker, advocate, educator, and created a brand identity and logo that carried across book covers, marketing materials, and speaking collateral. We supported multiple book launches with strategy, design, and marketing consulting, helping translate her mission into materials that could reach the audiences who needed them most.",
+      "results": [
+        "First website built from scratch, then <strong>fully redesigned</strong> as the brand and platform evolved",
+        "Multiple book launches supported with <strong>branding, design, and marketing strategy</strong>",
+        "Cohesive identity across books, speaking engagements, TEDx presence, and organizational materials"
+      ],
+      "testimonial": null,
+      "next": "novelsbymj"
+    },
+    {
+      "id": "novelsbymj",
+      "slug": "novelsbymj",
+      "title": "Novels by MJ",
+      "category": "Publishing & Literature",
+      "tags": ["Web Design", "Marketing Consulting"],
+      "featured": true,
+      "art": "art-novelsbymj",
+      "excerpt": "Award-winning mystery author and indie publishing coach. We built her first website from scratch, personally referred by another client.",
+      "hero_tagline": "Published. Polished. Impossible to overlook.",
+      "challenge": "M.J. Simms-Maddox came to us through a personal referral from an existing D8.Digital client. She had an award-winning body of work, the internationally recognized Priscilla Series, multiple published novels, and a handbook guiding other authors through the indie publishing path, but no website to show for it. Without a digital home, her books were harder to find, her coaching work had no platform, and new readers had nowhere to land. An author of her caliber deserved a presence that matched her output.",
+      "solution": "We built M.J.'s first website from scratch, designing a platform that served two distinct audiences at once: readers discovering the Priscilla Series for the first time, and emerging authors looking for her guidance on the indie publishing path. The site showcases her novels, positions her publishing handbook, and establishes her as both a storyteller and a teacher. We paired the build with marketing consulting to help M.J. extend her reach beyond the page, connecting her brand to the audiences who needed her most.",
+      "results": [
+        "First website built entirely from scratch, brought in through a <strong>personal client referral</strong>",
+        "Platform built to serve dual audiences: mystery/thriller readers and aspiring <strong>indie authors</strong>",
+        "Marketing strategy developed to support book visibility and grow her publishing coaching practice"
+      ],
+      "testimonial": null,
+      "next": "lemljams"
+    },
+    {
+      "id": "lemljams",
+      "slug": "lemljams",
+      "title": "LemLJams",
+      "category": "Food & Beverage",
+      "tags": ["Web Design", "eCommerce", "Branding"],
+      "featured": true,
+      "art": "art-lemljams",
+      "excerpt": "A grandmother's heritage jam recipes, built into a brand, put online, and shipped nationwide.",
+      "hero_tagline": "Happiness in a jar. Now shipping everywhere.",
+      "challenge": "LemLJams was a beloved fixture at the Piedmont Farmer's Market in North Carolina. Customers lined up for Lee Esther's heritage jam recipes, Triple Berry, Sweet Pepper, Strawberry, and walked away with jars they described as 'happiness in a jar.' But without a website, the business existed only where it could physically show up. Every sale required a Saturday at the market. A product with nationwide appeal was stuck inside a zip code.",
+      "solution": "We built LemLJams' first website from the ground up, an eCommerce storefront designed to capture the warmth, authenticity, and homemade character of the brand while making it effortless for customers anywhere in the country to order. The site tells the grandmother's recipe story in a way that converts: product storytelling, a clean shop experience, and a checkout flow built for first-time buyers. We also built in wholesale inquiry capability so the business could grow beyond direct-to-consumer sales.",
+      "results": [
+        "<strong>First website</strong> built entirely from scratch, zero digital presence to fully operational online store",
+        "Nationwide sales generated from <strong>multiple states</strong>, customers who had never visited a single farmer's market",
+        "Hundreds of dollars in online orders and growing, revenue that wouldn't exist without a digital storefront"
+      ],
+      "testimonial": null,
+      "next": "crown-jewels-links"
+    },
+    {
+      "id": "crown-jewels-links",
+      "slug": "crown-jewels-links",
+      "title": "Crown Jewels Links Inc.",
+      "category": "Nonprofit",
+      "tags": ["Web Design", "Web Security", "Member Portal"],
+      "featured": true,
+      "art": "art-crownjewels",
+      "excerpt": "Rebuilt from the ground up after a malware attack wiped out their entire digital presence.",
+      "hero_tagline": "From attacked to relaunched, stronger than before.",
+      "challenge": "Crown Jewels Links Inc. came to us after their original website was taken down by a malware attack, compounded by years of deferred maintenance. Their members had no portal, their organization had no home online, and they needed someone they could trust to rebuild fast and build it right. We were personally recommended for this engagement.",
+      "solution": "We rebuilt the Crown Jewels Links website from scratch, including a custom member portal that gave the organization a secure, functional digital home. Security hardening was embedded from the ground up, the kind of protection that could have prevented the original attack. Everything was built to be maintainable so the same failure can't happen again.",
+      "results": [
+        "Complete website rebuilt and relaunched from scratch after total loss from malware attack",
+        "Custom <strong>member portal</strong> integrated to serve the organization's community",
+        "Security-first architecture implemented to prevent repeat vulnerabilities"
+      ],
+      "testimonial": null,
+      "next": "fdy-inc"
+    },
+    {
+      "id": "fdy-inc",
+      "slug": "fdy-inc",
+      "title": "FDY Inc.",
+      "category": "Professional Services",
+      "tags": ["Web Design", "Branding", "Strategy"],
+      "featured": false,
+      "art": "art-fdy",
+      "excerpt": "Ten-plus years. Multiple website builds and redesigns. A client relationship built on results and trust.",
+      "hero_tagline": "A decade of trust. Renewed with every build.",
+      "challenge": "FDY Inc. has been a D8.Digital client for over a decade. As the business grew, their digital presence needed to keep pace, not once, but repeatedly. The challenge wasn't just building a website; it was continuing to serve a long-term partner whose standards, brand, and ambitions have evolved through multiple engagements.",
+      "solution": "We built FDY Inc.'s original website, then redesigned it as the business matured. Each engagement started from scratch, no recycled templates, no coasting on prior work. We treated every rebuild as a new client challenge, with fresh strategy and design that reflected where FDY Inc. stood at that moment, not where they started.",
+      "results": [
+        "<strong>10+ year</strong> client relationship maintained through multiple website builds and redesigns",
+        "Each engagement delivered a fully custom site, zero templates, zero shortcuts",
+        "Digital presence that has kept pace with the business through multiple growth phases"
+      ],
+      "testimonial": null,
+      "next": "blume-laboratories"
+    },
+    {
+      "id": "blume-laboratories",
+      "slug": "blume-laboratories",
+      "title": "Blume Laboratories",
+      "category": "Health & Wellness",
+      "tags": ["Branding", "Web Design", "Strategy"],
+      "featured": true,
+      "art": "art-blume",
+      "excerpt": "Science-backed skincare that needed a brand to match its ambition.",
+      "hero_tagline": "From invisible to impossible to ignore.",
+      "challenge": "Blume Laboratories had the science. What they lacked was a brand that communicated it. Their formulations were clinically proven, but their visual identity and web presence made it nearly impossible for distributors or consumers to take them seriously. They were losing deals at first impression.",
+      "solution": "We built a brand identity system that balanced scientific authority with consumer approachability, logo, color palette, typography, messaging hierarchy, and a custom website engineered to serve both B2B distributor audiences and direct-to-consumer shoppers without compromising either.",
+      "results": [
+        "<strong>2× increase</strong> in distributor inquiries within 90 days of launch",
+        "<strong>40% improvement</strong> in e-commerce conversion rate",
+        "Launched across 3 new retail channels within the first quarter post-rebrand"
+      ],
+      "testimonial": {
+        "quote": "Their design expertise and messaging strategy completely transformed how we reach distributors and customers. We went from invisible to impossible to ignore.",
+        "author": "Randy Zhou",
+        "title": "Founder, Blume Laboratories"
+      },
+      "next": "arw-jewelry"
+    },
+    {
+      "id": "arw-jewelry",
+      "slug": "arw-jewelry",
+      "title": "ARW Jewelry",
+      "category": "Retail & eCommerce",
+      "tags": ["eCommerce", "Branding", "Web Design"],
+      "featured": true,
+      "art": "art-arw",
+      "excerpt": "A classically trained jeweler and artist with a powerful story and a website that wasn't telling it.",
+      "hero_tagline": "A brand as singular as the work.",
+      "challenge": "Adriane Wiltse is a classically trained jeweler, fine artist, and metaphysical alchemist. Since her first launch, she had expanded into new healing modalities and needed a brand that unified everything she'd become, not just what she started as. Her old website was clunky, difficult to update, and generated almost no online sales despite the depth of her talent.",
+      "solution": "We started at the brand level, unifying her metaphysical jewelry work with her broader healing practice into a single visual identity that felt cohesive across every touchpoint. From there, we built a custom eCommerce site with filterable product categories and an intuitive consultation flow. The site was engineered so Adriane could update it herself, and designed so buyers felt confident purchasing art they couldn't hold.",
+      "results": [
+        "<strong>1,000%+</strong> increase in online sales year over year",
+        "<strong>Best sales month ever</strong>, just two months after launch",
+        "Responsive platform built for ongoing growth with no re-platforming required"
+      ],
+      "testimonial": {
+        "quote": "They actually listened to what we needed, respected our budget, and delivered a website that looks exactly like our brand. Zero templates. All custom.",
+        "author": "Adriane Wiltse",
+        "title": "Owner, ARW Jewelry"
+      },
+      "next": "prebody-works"
+    },
+    {
+      "id": "prebody-works",
+      "slug": "prebody-works",
+      "title": "PreBody Works",
+      "category": "Health & Wellness",
+      "tags": ["Web Design", "Digital Marketing", "Strategy"],
+      "featured": true,
+      "art": "art-prebody",
+      "excerpt": "A top-rated Houston massage therapist with a loyal following and a website that didn't reflect either.",
+      "hero_tagline": "89% more revenue. First month.",
+      "challenge": "PreBodyworks had built a reputation in Houston through exceptional service and genuine care for their clients. But their website didn't reflect any of it. Their old site understated their expertise, and stitching together three separate software tools for scheduling, messaging, and booking made the client experience feel disconnected and amateur. The brand promise wasn't translating online.",
+      "solution": "We rebuilt the website from the ground up, then wired it to a custom-configured CRM, automated SMS notification system, and scheduling tool, all accessible from a single login. Garland went from managing three disconnected platforms to one unified interface for clients, appointments, and revenue. The site itself was built for speed: 98/100 Google PageSpeed on mobile, 100/100 on desktop.",
+      "results": [
+        "<strong>89% increase</strong> in monthly revenue within the first 30 days of launch",
+        "Scheduling, automated client messaging, and CRM unified into one interface",
+        "<strong>98/100 PageSpeed (mobile) · 100/100 (desktop)</strong> at launch"
+      ],
+      "testimonial": null,
+      "next": "ruth-nathans"
+    },
+    {
+      "id": "ruth-nathans",
+      "slug": "ruth-nathans",
+      "title": "Ruth Nathan's",
+      "category": "Fashion & eCommerce",
+      "tags": ["eCommerce", "Web Design", "SEO"],
+      "featured": false,
+      "art": "art-ruth",
+      "excerpt": "Handcrafted bow ties and accessories with a maker-market following and almost no online sales.",
+      "hero_tagline": "From trunk shows to 800% online growth.",
+      "challenge": "Nicole Brown's handmade bow ties and accessories sold best at trunk shows and local markets. Her Squarespace site looked generic, lacked the cohesive branding that would make her work memorable online, and generated almost no eCommerce revenue. She needed to make the leap from in-person maker to online brand, without losing the handcrafted quality that made her work special.",
+      "solution": "We designed a custom eCommerce store that matched the elegance and personality of the pieces Nicole makes by hand. The brand identity we created carried into her social media and marketing, everything felt like the same business. Once the site launched, we ran a white-hat link building campaign to build domain authority and drive qualified organic traffic to the new store.",
+      "results": [
+        "<strong>800% growth</strong> in online sales, year over year",
+        "Brand identity extended across social media and marketing channels at launch",
+        "Measurable increases in users, pages per session, and time on site from day one"
+      ],
+      "testimonial": null,
+      "next": "pint-size-protesters"
+    },
+    {
+      "id": "pint-size-protesters",
+      "slug": "pint-size-protesters",
+      "title": "Pint Size Protesters",
+      "category": "Nonprofit",
+      "tags": ["Web Design", "eCommerce"],
+      "featured": false,
+      "art": "art-psp",
+      "excerpt": "A grassroots activist organization building their first online home, from nothing, on a tight timeline.",
+      "hero_tagline": "Activism that shows up online.",
+      "challenge": "Pint Size Protesters was built around a simple idea: families who want safe communities also want change. The founders came to us with a clear mission and no digital presence at all. Their first website needed to represent the organization credibly, display upcoming and past events, and make it easy for supporters to donate, all built from scratch.",
+      "solution": "We ran a discovery session to understand the organization's goals, their audience, and what a first-time visitor needed to understand about PSP's work. From there, we designed and built a fully custom site with integrated donation capabilities, an events section, and a contact system, on a compressed timeline. We handled copywriting and photography coordination so the founders could focus on the work that matters.",
+      "results": [
+        "Complete custom website launched from scratch on a tight timeline",
+        "Donation capabilities and event management integrated from day one",
+        "Copywriting, photography coordination, and design all delivered in-house"
+      ],
+      "testimonial": null,
+      "next": null
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+# ── Decap CMS config — D8.Digital ────────────────────────────
+# Replace GITHUB_USERNAME/REPO_NAME and YOUR_OAUTH_APP_CLIENT_ID
+# before deploying. See admin/index.html for setup instructions.
+
+backend:
+  name: github
+  repo: GITHUB_USERNAME/REPO_NAME
+  branch: main
+  auth_type: pkce
+  app_id: YOUR_OAUTH_APP_CLIENT_ID
+
+# Enables editing from localhost alongside `npx decap-server`
+local_backend: true
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# ── Collections ───────────────────────────────────────────────
+collections:
+
+  # Portfolio projects (edits data/projects.json)
+  - name: "projects"
+    label: "Portfolio Projects"
+    files:
+      - label: "All Projects"
+        name: "projects_list"
+        file: "data/projects.json"
+        fields:
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            label_singular: "Project"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "ID",           name: "id",           widget: "string" }
+              - { label: "Slug",         name: "slug",         widget: "string",  hint: "URL-safe, e.g. blume-laboratories" }
+              - { label: "Title",        name: "title",        widget: "string" }
+              - { label: "Category",     name: "category",     widget: "string" }
+              - label: "Tags"
+                name: "tags"
+                widget: "list"
+                hint: "Shown as filter buttons on the work page"
+              - { label: "Year",         name: "year",         widget: "number",  value_type: "int" }
+              - { label: "Featured",     name: "featured",     widget: "boolean", default: false }
+              - { label: "Art Class",    name: "art",          widget: "string",  hint: "CSS class for card artwork, e.g. art-blume", required: false }
+              - { label: "Excerpt",      name: "excerpt",      widget: "text",    hint: "One sentence shown on work index cards" }
+              - { label: "Hero Tagline", name: "hero_tagline", widget: "string" }
+              - { label: "Challenge",    name: "challenge",    widget: "text" }
+              - { label: "Solution",     name: "solution",     widget: "text" }
+              - label: "Results"
+                name: "results"
+                widget: "list"
+                field: { label: "Result", name: "result", widget: "string" }
+              - label: "Testimonial"
+                name: "testimonial"
+                widget: "object"
+                required: false
+                collapsed: false
+                fields:
+                  - { label: "Quote",  name: "quote",  widget: "text" }
+                  - { label: "Author", name: "author", widget: "string" }
+                  - { label: "Title",  name: "title",  widget: "string" }
+              - { label: "Next Project Slug", name: "next", widget: "string", required: false, hint: "Slug of the next project for the case study footer link" }
+
+  # Blog posts — ready for content when blog launches
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "blog/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "/blog/{{slug}}.html"
+    fields:
+      - { label: "Title",       name: "title",       widget: "string" }
+      - { label: "Date",        name: "date",        widget: "datetime" }
+      - { label: "Excerpt",     name: "excerpt",     widget: "text" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Body",        name: "body",        widget: "markdown" }

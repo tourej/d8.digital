@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Website Build Houston, Custom Sites Engineered to Rank | D8.Digital</title>
+  <meta name="description" content="We build custom websites for Houston businesses with SEO engineered in from day one, not bolted on after. One engagement. A site that looks right, loads fast, and ranks.">
+  <meta property="og:title" content="SEO Website Build Houston, D8.Digital">
+  <meta property="og:description" content="Custom websites built to rank. SEO strategy, technical foundation, and content architecture delivered together, not as two separate bills.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://d8.digital/seo-website-build.html">
+  <link rel="canonical" href="https://d8.digital/seo-website-build.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "SEO Website Build",
+    "description": "Custom website design and development with SEO strategy, technical SEO foundation, and local SEO setup delivered as one integrated engagement for Houston businesses.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "D8.Digital",
+      "url": "https://d8.digital",
+      "address": { "@type": "PostalAddress", "addressLocality": "Houston", "addressRegion": "TX", "addressCountry": "US" }
+    },
+    "areaServed": { "@type": "City", "name": "Houston" },
+    "serviceType": "Web Design and SEO",
+    "url": "https://d8.digital/seo-website-build.html"
+  }
+  </script>
+
+  <style>
+    /* ── Hero ───────────────────────────────────────── */
+    .page-hero {
+      padding-top: clamp(8rem, 16vw, 12rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+      padding-left: clamp(1.5rem, 4vw, 3rem);
+      padding-right: clamp(1.5rem, 4vw, 3rem);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--green-g1) 0%, transparent 65%);
+      top: -100px; right: -140px;
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner { max-width: 1320px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-h1 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800; line-height: .9; letter-spacing: -.048em;
+      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .page-h1 .ln { display: block; overflow: hidden; }
+    .page-h1 .ln-in {
+      display: block; opacity: 0; transform: translateY(108%);
+      animation: line .95s var(--ex) forwards;
+    }
+    .page-h1 .ln:nth-child(1) .ln-in { animation-delay: .15s; }
+    .page-h1 .ln:nth-child(2) .ln-in { animation-delay: .28s; }
+    .page-h1 .ln:nth-child(3) .ln-in { animation-delay: .41s; }
+    .page-hero-sub {
+      max-width: 600px; color: var(--ink2);
+      font-size: 1.15rem; line-height: 1.7;
+      opacity: 0; transform: translateY(16px);
+      animation: up .8s var(--ex) .6s forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;
+      opacity: 0; transform: translateY(12px);
+      animation: up .7s var(--ex) .75s forwards;
+    }
+
+    /* ── Problem / Solution split ───────────────────── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .split-h2 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800; line-height: 1; letter-spacing: -.035em;
+      margin-bottom: 1.5rem;
+    }
+    .split-body { color: var(--ink2); font-size: 1rem; line-height: 1.75; }
+    .split-body p { margin-bottom: 1.25rem; }
+
+    /* ── What's included ────────────────────────────── */
+    .incl-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .incl-card {
+      background: var(--bg3); border: 1px solid var(--rule);
+      border-radius: 12px; padding: 1.75rem;
+    }
+    .incl-num {
+      font-family: 'Archivo', sans-serif; font-size: .65rem;
+      font-weight: 800; letter-spacing: .12em; color: var(--green);
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .incl-name {
+      font-family: 'Archivo', sans-serif; font-weight: 800;
+      font-size: 1.1rem; letter-spacing: -.02em;
+      margin-bottom: .875rem; line-height: 1.2;
+    }
+    .incl-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .incl-list li {
+      display: flex; align-items: flex-start; gap: .625rem;
+      color: var(--ink2); font-size: .875rem; line-height: 1.5;
+    }
+    .incl-list li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--green); margin-top: .45rem;
+    }
+
+    /* ── Results bar ────────────────────────────────── */
+    .results-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--rule);
+      border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+    }
+    .result-cell {
+      background: var(--bg2); padding: 2.25rem 1.75rem;
+      text-align: center;
+    }
+    .result-n {
+      font-family: 'Archivo', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1;
+      color: var(--green); margin-bottom: .5rem;
+    }
+    .result-l { color: var(--ink2); font-size: .825rem; line-height: 1.5; }
+
+    /* ── Case study spotlight ───────────────────────── */
+    .cs-card {
+      background: var(--bg3); border: 1px solid var(--rule);
+      border-radius: 14px; padding: 2.5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .cs-cat {
+      font-size: .67rem; font-weight: 600; color: var(--green);
+      letter-spacing: .14em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .cs-title {
+      font-family: 'Archivo', sans-serif; font-weight: 800;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      letter-spacing: -.03em; line-height: 1.05; margin-bottom: 1rem;
+    }
+    .cs-body { color: var(--ink2); font-size: .95rem; line-height: 1.72; margin-bottom: 1.75rem; }
+    .cs-results { display: flex; flex-direction: column; gap: 1rem; }
+    .cs-result {
+      padding: 1.25rem 1.5rem; background: var(--bg);
+      border: 1px solid var(--rule); border-radius: 8px;
+      font-size: .9rem; line-height: 1.5;
+    }
+
+    /* ── FAQ ────────────────────────────────────────── */
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-top: 1px solid var(--rule); }
+    .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      text-align: left; padding: 1.5rem 0;
+      font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 600;
+      color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq-q:hover { color: var(--green); }
+    .faq-icon { flex-shrink: 0; transition: transform .3s var(--eq); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      color: var(--ink2); font-size: .95rem; line-height: 1.75;
+      max-height: 0; overflow: hidden; transition: max-height .4s var(--eq), padding .3s;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding-bottom: 1.5rem; }
+
+    /* ── CTA ────────────────────────────────────────── */
+    .cta-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .cta-h2 { font-family: 'Archivo', sans-serif; font-size: clamp(3rem, 7.5vw, 8rem); font-weight: 800; line-height: .9; letter-spacing: -.052em; margin-bottom: 2rem; }
+    .cta-sub { color: var(--ink2); font-size: 1.05rem; line-height: 1.68; margin-bottom: 2.75rem; }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .split { grid-template-columns: 1fr; gap: 3rem; }
+      .incl-grid { grid-template-columns: 1fr 1fr; }
+      .results-bar { grid-template-columns: 1fr 1fr; }
+      .cs-card { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .incl-grid { grid-template-columns: 1fr; }
+      .results-bar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-h1 .ln-in, .page-hero-sub, .hero-ctas { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cur"  id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+
+  <div id="nav-mount"></div>
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="hero-inner">
+      <h1 class="page-h1">
+        <span class="ln"><span class="ln-in">A Website</span></span>
+        <span class="ln"><span class="ln-in">Built to</span></span>
+        <span class="ln"><span class="ln-in g">Rank.</span></span>
+      </h1>
+      <p class="page-hero-sub">Most Houston businesses build a website, then hire an SEO agency to fix it. We do both at once, designing every page, URL, and line of copy to rank from the day it goes live.</p>
+      <div class="hero-ctas">
+        <a href="/book.html" class="btn-fill">Get a Free Strategy Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+        <a href="/work/index.html" class="btn-ghost">See Our Work</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="split">
+        <div class="rv">
+          <div class="lbl">The Problem</div>
+          <h2 class="split-h2">Two Bills for One Job You Should've Done <span class="g">Together.</span></h2>
+        </div>
+        <div class="split-body rv d1">
+          <p>The standard path goes like this: hire a web designer, launch the site, then realize it's not ranking, then hire an SEO agency to restructure everything the designer built. Two vendors, two contracts, twice the friction, and a website that gets rebuilt before it's ever paid for itself.</p>
+          <p>SEO isn't a layer you add to a finished website. It's a structural decision that affects your URL architecture, your heading hierarchy, your content structure, your page speed, and your local signals. When it's an afterthought, you pay for it twice. When it's engineered in from the start, every dollar goes further.</p>
+          <p>That's the D8.Digital SEO Website Build: one engagement, one team, one site that launches ready to compete.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="lbl rv">What's Included</div>
+      <h2 class="rv" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,5vw,5rem);font-weight:800;line-height:.93;letter-spacing:-.042em;margin-bottom:3rem">Everything<br>in One<br><span class="g">Engagement.</span></h2>
+      <div class="incl-grid">
+        <div class="incl-card rv">
+          <div class="incl-num">Phase 01</div>
+          <div class="incl-name">Discovery &amp; Strategy</div>
+          <ul class="incl-list">
+            <li>Business and audience analysis</li>
+            <li>Competitor and keyword research</li>
+            <li>Search intent mapping</li>
+            <li>Site architecture planning</li>
+            <li>Local SEO opportunity audit</li>
+          </ul>
+        </div>
+        <div class="incl-card rv d1">
+          <div class="incl-num">Phase 02</div>
+          <div class="incl-name">Design &amp; Content</div>
+          <ul class="incl-list">
+            <li>Custom wireframes and UX design</li>
+            <li>SEO-structured copywriting</li>
+            <li>Keyword-targeted page titles and meta</li>
+            <li>H1/H2 hierarchy built for search</li>
+            <li>Internal linking architecture</li>
+          </ul>
+        </div>
+        <div class="incl-card rv d2">
+          <div class="incl-num">Phase 03</div>
+          <div class="incl-name">Development &amp; Technical SEO</div>
+          <ul class="incl-list">
+            <li>Custom HTML/CSS or CMS build</li>
+            <li>Core Web Vitals optimization (90+ scores)</li>
+            <li>Schema markup (LocalBusiness, Service, FAQ)</li>
+            <li>XML sitemap and robots.txt</li>
+            <li>HTTPS, canonical tags, and redirects</li>
+          </ul>
+        </div>
+        <div class="incl-card rv">
+          <div class="incl-num">Phase 04</div>
+          <div class="incl-name">Local SEO Setup</div>
+          <ul class="incl-list">
+            <li>Google Business Profile optimization</li>
+            <li>NAP consistency audit and fixes</li>
+            <li>Major directory submissions</li>
+            <li>Local schema on all relevant pages</li>
+            <li>Review strategy and templates</li>
+          </ul>
+        </div>
+        <div class="incl-card rv d1">
+          <div class="incl-num">Phase 05</div>
+          <div class="incl-name">Launch &amp; Indexing</div>
+          <ul class="incl-list">
+            <li>Google Search Console setup</li>
+            <li>Sitemap submission and indexing</li>
+            <li>301 redirect map for existing URLs</li>
+            <li>GA4 analytics and goal tracking</li>
+            <li>Launch QA and pre-flight checklist</li>
+          </ul>
+        </div>
+        <div class="incl-card rv d2">
+          <div class="incl-num">Phase 06</div>
+          <div class="incl-name">Post-Launch SEO (90 Days)</div>
+          <ul class="incl-list">
+            <li>Monthly ranking report and commentary</li>
+            <li>Search Console monitoring and fixes</li>
+            <li>Content gap identification</li>
+            <li>One content update per month</li>
+            <li>Strategy call at 30, 60, and 90 days</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner">
+      <div class="lbl rv">Real Results</div>
+      <h2 class="rv" style="font-family:'Archivo',sans-serif;font-size:clamp(2.5rem,5vw,5rem);font-weight:800;line-height:.93;letter-spacing:-.042em;margin-bottom:3rem">What Happens<br>When <span class="g">It Works.</span></h2>
+      <div class="results-bar rv">
+        <div class="result-cell">
+          <div class="result-n">89%</div>
+          <div class="result-l">Revenue increase in first 30 days, PreBody Works</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-n">98</div>
+          <div class="result-l">Google PageSpeed mobile score at launch</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-n">1,000<span style="font-size:2rem">%</span></div>
+          <div class="result-l">YoY online sales increase, ARW Jewelry</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-n">800%</div>
+          <div class="result-l">Online sales growth year over year, Ruth Nathan's</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY SPOTLIGHT -->
+  <section class="section" style="background:var(--bg)">
+    <div class="inner">
+      <div class="lbl rv">Case Study</div>
+      <div class="cs-card rv">
+        <div>
+          <div class="cs-cat">Health &amp; Wellness · Houston, TX</div>
+          <h2 class="cs-title">PreBody Works</h2>
+          <p class="cs-body">Garland had a loyal client base and a website that didn't reflect any of it. Slow load times, disconnected booking software, and no local SEO presence meant he was invisible to anyone searching for massage therapy in Houston.</p>
+          <p class="cs-body">We rebuilt the site with SEO architecture from the ground up, unified three separate platforms into one, and launched with full Google Business Profile optimization and local schema on every page.</p>
+          <a href="/work/prebody-works.html" class="btn-ghost" style="margin-top:.5rem">Read the Full Case Study <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+        </div>
+        <div class="cs-results">
+          <div class="cs-result"><strong style="color:var(--ink)">89% revenue increase</strong><br><span style="color:var(--ink2);font-size:.8rem">First 30 days post-launch</span></div>
+          <div class="cs-result"><strong style="color:var(--ink)">98/100 PageSpeed (mobile)</strong><br><span style="color:var(--ink2);font-size:.8rem">100/100 on desktop at launch</span></div>
+          <div class="cs-result"><strong style="color:var(--ink)">Scheduling, CRM &amp; SMS unified</strong><br><span style="color:var(--ink2);font-size:.8rem">Three platforms replaced by one</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background:var(--bg2)">
+    <div class="inner" style="max-width:860px">
+      <div class="lbl rv">FAQ</div>
+      <h2 class="rv" style="font-family:'Archivo',sans-serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.035em;margin-bottom:3rem">Common<br>Questions.</h2>
+      <div class="faq-list rv">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How is this different from hiring a web designer and an SEO agency separately?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <div class="faq-a">When design and SEO are siloed, you end up with a beautiful site built on a URL structure Google can't understand, pages that compete with each other for keywords, and meta descriptions written after the fact. We design the site and its SEO strategy at the same time, so every decision serves both goals from the start. One team, one brief, one coherent outcome.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How long does an SEO Website Build take?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <div class="faq-a">Most projects run 6–10 weeks from signed contract to launch, depending on the number of pages, content complexity, and how quickly client feedback comes in. The 90-day post-launch SEO period begins at launch and runs concurrently with normal business operations. We'll give you a specific timeline in your strategy call.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How much does it cost?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <div class="faq-a">Every project is scoped individually based on the number of pages, service complexity, and whether eCommerce is involved. Most SEO Website Builds for Houston service businesses range from $4,000–$10,000. We're always transparent about pricing before you commit to anything, book a strategy call and we'll give you a specific range within 48 hours.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            When will I start ranking on Google?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <div class="faq-a">We'll be direct: no one can guarantee a ranking or a timeline, and anyone who does is misleading you. What we can guarantee is that your site will be built correctly, technically sound, strategically structured, and optimized for the keywords that matter in your Houston market. Most clients see meaningful movement in local rankings within 60–120 days of launch, with compounding results over 6–12 months.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Do you work with businesses outside of Houston?
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <div class="faq-a">Yes. Our second office is in Manila, Philippines, and we've worked with businesses across the US and internationally. Our SEO Website Build process applies regardless of market, we research your specific audience and competitive landscape as part of the strategy phase. That said, our deepest expertise is the Houston market, and local clients typically see the fastest results.</div>
+        </div>
+      </div>
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How is this different from hiring a web designer and an SEO agency separately?", "acceptedAnswer": { "@type": "Answer", "text": "When design and SEO are siloed, you end up with a beautiful site built on a URL structure Google can't understand, pages that compete with each other for keywords, and meta descriptions written after the fact. We design the site and its SEO strategy at the same time, so every decision serves both goals from the start." } },
+          { "@type": "Question", "name": "How long does an SEO Website Build take?", "acceptedAnswer": { "@type": "Answer", "text": "Most projects run 6–10 weeks from signed contract to launch. The 90-day post-launch SEO period begins at launch." } },
+          { "@type": "Question", "name": "How much does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Most SEO Website Builds for Houston service businesses range from $4,000–$10,000. Every project is scoped individually based on number of pages and complexity." } },
+          { "@type": "Question", "name": "When will I start ranking on Google?", "acceptedAnswer": { "@type": "Answer", "text": "Most clients see meaningful movement in local rankings within 60–120 days of launch, with compounding results over 6–12 months. No one can guarantee a specific ranking or timeline." } },
+          { "@type": "Question", "name": "Do you work with businesses outside of Houston?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We have a second office in Manila, Philippines, and have worked with businesses across the US and internationally. Our deepest expertise is the Houston market." } }
+        ]
+      }
+      </script>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contact" style="background:var(--bg)">
+    <div class="cta-inner">
+      <div class="lbl rv" style="justify-content:center">Start the Conversation</div>
+      <h2 class="cta-h2 rv">Let's Build<br>Your Site<br><span class="g">Right.</span></h2>
+      <p class="cta-sub rv d1">Book a free 30-minute strategy call. We'll walk through your current site, your market, and exactly what an SEO Website Build would look like for your business. No pressure, no pitch deck.</p>
+      <div class="rv d2">
+        <a href="/book.html" class="btn-fill">Schedule Your Free Call <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h9M8.5 3.5l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+
+  <script src="/shared/components.js"></script>
+  <script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded', 'false'); });
+        if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Case Study | D8.Digital</title>
+  <meta name="description" id="page-desc" content="Case study from D8.Digital.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared/styles.css">
+
+  <style>
+    .cs-hero {
+      min-height: 62svh;
+      padding: clamp(9rem, 18vw, 14rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 7vw, 6rem);
+      display: flex; align-items: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .cs-hero-art { position: absolute; inset: 0; z-index: 0; }
+    .cs-hero-art::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, oklch(7.5% 0.009 145 / 0.95) 0%, oklch(7.5% 0.009 145 / 0.4) 50%, oklch(7.5% 0.009 145 / 0.2) 100%);
+    }
+    .cs-hero-inner { max-width: 1320px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+    .cs-category { color: var(--green); font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.125rem; }
+    .cs-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800; line-height: .9; letter-spacing: -.05em; margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(24px);
+      animation: up .95s var(--ex) .2s forwards;
+    }
+    .cs-tagline {
+      color: var(--ink2); font-size: clamp(1rem, 1.8vw, 1.25rem);
+      max-width: 600px; line-height: 1.6;
+      opacity: 0; transform: translateY(16px);
+      animation: up .8s var(--ex) .42s forwards;
+    }
+    .cs-meta {
+      display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem;
+      opacity: 0; transform: translateY(12px);
+      animation: up .7s var(--ex) .58s forwards;
+    }
+    .cs-meta-label { color: var(--ink3); font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .25rem; }
+    .cs-meta-val { font-size: .9rem; font-weight: 600; }
+    .cs-body { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+    .cs-aside { position: sticky; top: 6rem; }
+    .cs-aside-label { color: var(--green); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cs-aside-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .cs-aside-list li { color: var(--ink2); font-size: .88rem; line-height: 1.5; display: flex; align-items: flex-start; gap: .625rem; }
+    .cs-aside-list li::before { content: ''; display: block; flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--green); margin-top: .45rem; }
+    .cs-section-label { color: var(--green); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.125rem; }
+    .cs-h2 { font-family: 'Archivo', sans-serif; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 1.25rem; }
+    .cs-text { color: var(--ink2); font-size: 1.025rem; line-height: 1.78; }
+    .cs-text + .cs-text { margin-top: 1.25rem; }
+    .cs-divider { height: 1px; background: var(--rule); margin: 3.5rem 0; }
+    .results-strip { background: var(--bg2); border: 1px solid var(--rule); border-radius: 14px; padding: 2.75rem; margin-top: 3.5rem; }
+    .results-label { color: var(--green); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2rem; }
+    .results-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .results-list li { display: flex; align-items: flex-start; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+    .results-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .result-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--green-muted); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .result-text { color: var(--ink2); font-size: .925rem; line-height: 1.5; }
+    .result-text strong { color: var(--ink); font-weight: 600; }
+    .cs-quote { border-left: none; border-top: 3px solid var(--green); padding-top: 2rem; margin-top: 3.5rem; }
+    .cs-quote-text { font-family: 'Archivo', sans-serif; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 800; font-style: italic; line-height: 1.35; letter-spacing: -.02em; margin-bottom: 1.75rem; }
+    .cs-quote-author { display: flex; align-items: center; gap: .875rem; }
+    .cs-quote-av { width: 42px; height: 42px; border-radius: 50%; background: var(--green-muted); border: 1.5px solid var(--green-dim); display: flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: .8rem; color: var(--green); flex-shrink: 0; }
+    .cs-quote-name { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: .9rem; line-height: 1.2; }
+    .cs-quote-title { color: var(--ink3); font-size: .78rem; margin-top: .1rem; }
+    .next-project { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2.5rem; border: 1px solid var(--rule); border-radius: 14px; text-decoration: none; transition: border-color .25s, background .25s; }
+    .next-project:hover { border-color: var(--green-dim); background: var(--bg2); }
+    .next-label { color: var(--ink3); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .5rem; }
+    .next-title { font-family: 'Archivo', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; color: var(--green); }
+    .next-arrow { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--rule2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .2s, border-color .2s; }
+    .next-project:hover .next-arrow { background: var(--green); border-color: var(--green); }
+    .next-project:hover .next-arrow path { stroke: var(--bg); }
+    @media (max-width: 900px) {
+      .cs-body { grid-template-columns: 1fr; }
+      .cs-aside { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cur" id="cur"></div>
+  <div class="cur-ring" id="curR"></div>
+  <div id="nav-mount"></div>
+  <div id="page-content">
+    <div style="min-height:100svh;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:.9rem">Loading&hellip;</div>
+  </div>
+  <div id="footer-mount"></div>
+  <script src="/shared/components.js"></script>
+  <script>
+    (async function () {
+      const slug = location.pathname.split('/').pop().replace('.html', '');
+      const res = await fetch('/data/projects.json');
+      const { projects } = await res.json();
+      const p = projects.find(x => x.slug === slug);
+      if (!p) {
+        document.getElementById('page-content').innerHTML = `<div style="padding:10rem 2rem;text-align:center"><p style="color:var(--ink3);margin-bottom:1.5rem">Project not found.</p><a href="/work/index.html" class="btn-fill">Back to Work</a></div>`;
+        return;
+      }
+      document.getElementById('page-title').textContent = `${p.title} | D8.Digital`;
+      document.getElementById('page-desc').content = p.excerpt;
+      const initials = p.testimonial ? p.testimonial.author.split(' ').map(w => w[0]).join('').slice(0,2) : '';
+      const nextProject = p.next ? projects.find(x => x.slug === p.next) : null;
+      const nextHTML = nextProject ? `
+        <section class="section" style="background:var(--bg)">
+          <div class="inner">
+            <div class="lbl">Next Project</div>
+            <a href="/work/${nextProject.slug}.html" class="next-project rv">
+              <div><div class="next-label">Up Next</div><div class="next-title">${nextProject.title}</div></div>
+              <div class="next-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+            </a>
+          </div>
+        </section>` : '';
+      document.getElementById('page-content').innerHTML = `
+        <header class="cs-hero">
+          <div class="cs-hero-art ${p.art || ''}"></div>
+          <div class="cs-hero-inner">
+            <div class="cs-category">${p.category}</div>
+            <h1 class="cs-title">${p.title}</h1>
+            <p class="cs-tagline">${p.hero_tagline}</p>
+            <div class="cs-meta">
+              <div class="cs-meta-item"><div class="cs-meta-label">Services</div><div class="cs-meta-val">${p.tags.join(' / ')}</div></div>
+              <div class="cs-meta-item"><div class="cs-meta-label">Category</div><div class="cs-meta-val">${p.category}</div></div>
+            </div>
+          </div>
+        </header>
+        <section class="section" style="background:var(--bg)">
+          <div class="inner">
+            <div class="cs-body">
+              <div class="cs-aside rv">
+                <div class="cs-aside-label">Services Delivered</div>
+                <ul class="cs-aside-list">${p.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+              </div>
+              <div>
+                <div class="rv">
+                  <div class="cs-section-label">The Challenge</div>
+                  <h2 class="cs-h2">Why They Came to Us</h2>
+                  <p class="cs-text">${p.challenge}</p>
+                </div>
+                <div class="cs-divider"></div>
+                <div class="rv d1">
+                  <div class="cs-section-label">The Solution</div>
+                  <h2 class="cs-h2">What We Built</h2>
+                  <p class="cs-text">${p.solution}</p>
+                </div>
+                <div class="results-strip rv d2">
+                  <div class="results-label">Results</div>
+                  <ul class="results-list">
+                    ${p.results.map(r => `<li><div class="result-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4 6.5 10.5 3 7"/></svg></div><div class="result-text">${r}</div></li>`).join('')}
+                  </ul>
+                </div>
+                ${p.testimonial ? `<blockquote class="cs-quote rv d3"><p class="cs-quote-text">"${p.testimonial.quote}"</p><div class="cs-quote-author"><div class="cs-quote-av" aria-hidden="true">${initials}</div><div><div class="cs-quote-name">${p.testimonial.author}</div><div class="cs-quote-title">${p.testimonial.title}</div></div></div></blockquote>` : ''}
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section" style="background:var(--bg2);padding-top:2rem;padding-bottom:2rem">
+          <div class="inner" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+            <a href="/work/index.html" class="btn-ghost" style="display:inline-flex;align-items:center;gap:.625rem">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 7h-9M6 3l-4 4 4 4"/></svg>
+              All Projects
+            </a>
+            <a href="/book.html" class="btn-fill">Start Your Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M8 3l4 4-4 4"/></svg></a>
+          </div>
+        </section>
+        ${nextHTML}
+      `;
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+      document.querySelectorAll('.rv').forEach(el => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
