@@ -10,19 +10,30 @@
   const NAV = `
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo">D8<span class="dot">.</span>Digital</a>
-  <ul class="nav-links" id="navLinks">
+  <ul class="nav-links">
     <li><a href="/work/index.html">Work</a></li>
     <li><a href="/services.html">Services</a></li>
     <li><a href="/about.html">About</a></li>
     <li><a href="/blog/index.html">Blog</a></li>
     <li><a href="/contact.html">Contact</a></li>
-    <li class="nav-book-li"><a href="/book.html" class="nav-cta">Book a Call</a></li>
   </ul>
-  <a href="/book.html" class="nav-cta nav-cta-desktop">Book a Call</a>
+  <a href="/book.html" class="nav-cta">Book a Call</a>
   <button class="nav-burger" id="navBurger" aria-label="Open navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>`;
+
+  const MOBILE_MENU = `
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="/work/index.html">Work</a>
+    <a href="/services.html">Services</a>
+    <a href="/about.html">About</a>
+    <a href="/blog/index.html">Blog</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+  <a href="/book.html" class="mobile-menu-cta">Book a Call</a>
+</div>`;
 
   const FOOTER = `
 <footer>
@@ -42,6 +53,10 @@
 
         <li><a href="/contact.html">Contact</a></li>
       </ul>
+      <ul class="foot-links foot-legal">
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
       <div class="foot-copy">&copy; ${new Date().getFullYear()} D8.Digital. All rights reserved.</div>
     </nav>
   </div>
@@ -53,13 +68,17 @@
     const footerMount = document.getElementById('footer-mount');
     if (navMount)    navMount.outerHTML    = NAV;
     if (footerMount) footerMount.outerHTML = FOOTER;
+    // Mobile menu lives on body — outside nav's stacking context
+    const tmp = document.createElement('div');
+    tmp.innerHTML = MOBILE_MENU;
+    document.body.appendChild(tmp.firstElementChild);
     markActivePage();
   }
 
   /* ── Active nav link (matches pathname) ──────────────── */
   function markActivePage() {
     const path = window.location.pathname.replace(/\/?$/, '');
-    document.querySelectorAll('.nav-links a').forEach(a => {
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
       const href = a.getAttribute('href').replace(/\/?$/, '');
       if (href && path.endsWith(href)) {
         a.setAttribute('aria-current', 'page');
@@ -109,21 +128,23 @@
     onScroll();
 
     const burger = document.getElementById('navBurger');
-    const links  = document.getElementById('navLinks');
-    if (burger && links) {
+    const menu   = document.getElementById('mobileMenu');
+    if (burger && menu) {
       burger.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
-        links.classList.toggle('open', open);
+        const open = menu.classList.toggle('open');
+        nav.classList.toggle('open', open);
         burger.setAttribute('aria-expanded', String(open));
         burger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        menu.setAttribute('aria-hidden', String(!open));
         document.body.style.overflow = open ? 'hidden' : '';
       });
-      links.querySelectorAll('a').forEach(a => {
+      menu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
+          menu.classList.remove('open');
           nav.classList.remove('open');
-          links.classList.remove('open');
           burger.setAttribute('aria-expanded', 'false');
           burger.setAttribute('aria-label', 'Open navigation');
+          menu.setAttribute('aria-hidden', 'true');
           document.body.style.overflow = '';
         });
       });
