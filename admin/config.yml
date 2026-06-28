@@ -9,8 +9,8 @@ backend:
   auth_type: pkce
   app_id: YOUR_OAUTH_APP_CLIENT_ID
 
-# Enables editing from localhost alongside `npx decap-server`
-local_backend: true
+# IMPORTANT: GitHub OAuth credentials must be configured before the CMS is usable.
+# Set repo and app_id above, then create a GitHub OAuth App at github.com/settings/developers.
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"

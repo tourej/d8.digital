@@ -2,7 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/d8/public_html
-    - /bin/cp -r index.html about.html services.html contact.html book.html seo-website-build.html privacy.html terms.html robots.txt sitemap.xml llms.txt $DEPLOYPATH
+    - /bin/cp -r index.html about.html services.html contact.html book.html seo-website-build.html privacy.html terms.html robots.txt sitemap.xml llms.txt .htaccess $DEPLOYPATH
     - /bin/cp -r shared $DEPLOYPATH
     - /bin/cp -r blog $DEPLOYPATH
     - /bin/cp -r work $DEPLOYPATH

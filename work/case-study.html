@@ -177,6 +177,7 @@
       /* Update meta */
       document.getElementById('page-title').textContent = `${p.title} | D8.Digital`;
       document.getElementById('page-desc').content = p.excerpt;
+      document.getElementById('canonical').href = `https://d8.digital/work/${p.slug}.html`;
 
       /* Initials for avatar */
       const initials = p.testimonial ? p.testimonial.author.split(' ').map(w => w[0]).join('').slice(0,2) : '';
