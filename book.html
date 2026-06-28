@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
   <title>Book a Call | D8.Digital</title>
   <meta name="description" content="Schedule a free 30-minute discovery call with D8.Digital. Pick a time that works for you.">
   <meta property="og:title" content="Book a Call | D8.Digital">
@@ -16,6 +17,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/shared/styles.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#0b0e0c">
 
   <style>
     /* ── Page layout ───────────────────────────────────────── */
@@ -34,6 +38,9 @@
       border-radius: 50%;
       pointer-events: none;
       animation: glow 12s ease-in-out infinite alternate;
+    }
+    @media (max-width: 480px) {
+      .book-page::before { width: 300px; height: 300px; top: -60px; right: -100px; }
     }
 
     .book-inner {
@@ -482,7 +489,7 @@
       const remote = await fetch(`${OS_BASE}/gcal/config`).then(r => r.json());
       Object.assign(config, remote);
     } catch (e) {
-      console.warn('Could not load booking config, using defaults');
+      // booking config unavailable, using defaults
     }
     renderCalendar();
   });
@@ -629,7 +636,7 @@
         });
       });
     } catch (e) {
-      console.warn('Could not fetch availability:', e);
+      // availability fetch failed, showing empty slots
     }
   }
 

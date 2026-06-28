@@ -168,6 +168,9 @@ body {
   top: -80px; right: -120px;
   border-radius: 50%; pointer-events: none;
 }
+@media (max-width: 480px) {
+  .page-hero::before { width: 260px; height: 260px; top: -40px; right: -60px; }
+}
 .hero-inner { max-width: 1320px; margin: 0 auto; position: relative; z-index: 1; }
 .page-h1 {
   font-family: 'Archivo', sans-serif;

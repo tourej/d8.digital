@@ -53,7 +53,6 @@
         <li><a href="/seo-website-build.html">SEO + Web Build</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/blog/index.html">Blog</a></li>
-
         <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="foot-links foot-legal">
