@@ -141,7 +141,7 @@
     /* ── Time slots ─────────────────────────────────────────── */
     .slots-title {
       font-size: .85rem; font-weight: 600; color: var(--ink2);
-      margin-bottom: .75rem; letter-spacing: .03em;
+      margin-bottom: .75rem; letter-spacing: .03em; text-align: center;
     }
     .slots-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
@@ -337,7 +337,7 @@
               <div class="slots-tz" id="tzLabel"></div>
             </div>
           </div>
-          <div class="btn-row" style="margin-top:2rem">
+          <div class="btn-row" style="margin-top:2rem;justify-content:center">
             <button class="btn-primary" id="btn2Next" onclick="goStep(3)" disabled>Continue →</button>
           </div>
         </div>
@@ -372,9 +372,9 @@
               </div>
             </div>
             <div class="err-msg" id="errMsg"></div>
-            <div class="btn-row">
-              <button class="btn-secondary" type="button" onclick="goStep(2)">← Back</button>
-              <button class="btn-primary" type="submit" id="btnBook">Book My Call →</button>
+            <div class="btn-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;margin-top:1.5rem">
+              <button class="btn-secondary" type="button" onclick="goStep(2)" style="width:100%">← Back</button>
+              <button class="btn-primary" type="submit" id="btnBook" style="width:100%">Book My Call →</button>
             </div>
           </form>
         </div>
