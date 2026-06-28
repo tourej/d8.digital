@@ -463,7 +463,7 @@ footer {
   .nav-links { display: none; }
   .foot { grid-template-columns: 1fr; }
   .foot-right { text-align: left; }
-  .foot-links { justify-content: flex-start; }
+  .foot-links { justify-content: flex-start; flex-direction: column; gap: .75rem; }
   /* Always show service detail text on touch devices — hover is not available */
   .svc-detail { grid-template-rows: 1fr !important; }
 }

@@ -17,7 +17,7 @@
     <li><a href="/blog/index.html">Blog</a></li>
     <li><a href="/contact.html">Contact</a></li>
   </ul>
-  <a href="/book.html" class="nav-cta">Book a Call</a>
+
 </nav>`;
 
   const FOOTER = `
@@ -26,7 +26,7 @@
     <div>
       <div class="foot-logo">D8<span class="dot">.</span>Digital</div>
       <div class="foot-sub">Formerly Demonstr8d Solutions &middot; Houston, TX &middot; Manila, PH</div>
-      <div class="foot-email"><a href="mailto:hello@d8.digital">hello@d8.digital</a></div>
+      <div class="foot-email"><a href="/contact.html">Get in touch →</a></div>
     </div>
     <nav class="foot-right" aria-label="Footer navigation">
       <ul class="foot-links">
@@ -35,7 +35,7 @@
         <li><a href="/seo-website-build.html">SEO + Web Build</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/blog/index.html">Blog</a></li>
-        <li><a href="/book.html">Book a Call</a></li>
+
         <li><a href="/contact.html">Contact</a></li>
       </ul>
       <div class="foot-copy">&copy; ${new Date().getFullYear()} D8.Digital. All rights reserved.</div>
