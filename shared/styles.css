@@ -142,6 +142,15 @@ body {
   text-decoration: none; transition: transform .2s var(--eq), box-shadow .2s;
 }
 .mobile-menu-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--green-g2); }
+.mobile-menu-close {
+  position: absolute; top: 1.25rem; right: 1.5rem;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--rule); background: var(--bg3); padding: 0;
+  color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, color .2s;
+}
+.mobile-menu-close:hover { border-color: var(--green-dim); color: var(--green); }
 
 /* ── Section scaffolding ────────────────────────────────── */
 .section { padding: clamp(4.5rem, 9vw, 8rem) clamp(1.5rem, 4vw, 3rem); }

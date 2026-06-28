@@ -25,6 +25,9 @@
 
   const MOBILE_MENU = `
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close navigation">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
   <nav>
     <a href="/work/index.html">Work</a>
     <a href="/services.html">Services</a>
@@ -149,7 +152,7 @@
         b.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
         m.setAttribute('aria-hidden', String(!open));
         document.body.style.overflow = open ? 'hidden' : '';
-      } else if (e.target.closest('.mobile-menu a')) {
+      } else if (e.target.closest('#mobileMenuClose') || e.target.closest('.mobile-menu a')) {
         closeMobileMenu();
       }
     });
