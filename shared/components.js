@@ -10,14 +10,18 @@
   const NAV = `
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo">D8<span class="dot">.</span>Digital</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="/work/index.html">Work</a></li>
     <li><a href="/services.html">Services</a></li>
     <li><a href="/about.html">About</a></li>
     <li><a href="/blog/index.html">Blog</a></li>
     <li><a href="/contact.html">Contact</a></li>
+    <li class="nav-book-li"><a href="/book.html" class="nav-cta">Book a Call</a></li>
   </ul>
-
+  <a href="/book.html" class="nav-cta nav-cta-desktop">Book a Call</a>
+  <button class="nav-burger" id="navBurger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>`;
 
   const FOOTER = `
@@ -102,7 +106,28 @@
     if (!nav) return;
     const onScroll = () => nav.classList.toggle('stuck', scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once in case page reloaded mid-scroll
+    onScroll();
+
+    const burger = document.getElementById('navBurger');
+    const links  = document.getElementById('navLinks');
+    if (burger && links) {
+      burger.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        links.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          nav.classList.remove('open');
+          links.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          burger.setAttribute('aria-label', 'Open navigation');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   }
 
   /* ── Scroll reveals ───────────────────────────────────── */
