@@ -146,6 +146,9 @@
     .slots-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
     }
+    .slots-tz {
+      font-size: .72rem; color: var(--ink3); margin-top: .5rem; text-align: center;
+    }
     .slot {
       background: var(--bg3);
       border: 1px solid var(--rule);
@@ -331,6 +334,7 @@
             <div>
               <div class="slots-title" id="slotsTitle">Select a date to see available times</div>
               <div class="slots-grid" id="slotsGrid"></div>
+              <div class="slots-tz" id="tzLabel"></div>
             </div>
           </div>
           <div class="btn-row" style="margin-top:2rem">
@@ -382,10 +386,10 @@
             <h2 class="confirm-h2">You're booked!</h2>
             <p class="confirm-p">A calendar invite has been sent to your email. You'll get a reminder 1 hour before the call.</p>
             <div class="confirm-details" id="confirmDetails"></div>
-            <div id="meetLinkWrap" style="display:none;margin-bottom:1.5rem">
-              <a id="meetLinkBtn" href="#" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;text-decoration:none">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11 2H5a1 1 0 00-1 1v10a1 1 0 001 1h6a1 1 0 001-1V3a1 1 0 00-1-1zM8 12a1 1 0 110-2 1 1 0 010 2z"/><path d="M13 4.5l2 1.5v4l-2 1.5V4.5z"/></svg>
-                Join Google Meet
+            <div id="addCalWrap" style="display:none;margin-bottom:1.5rem">
+              <a id="addCalBtn" href="#" download="booking.ics" class="btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;text-decoration:none">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12 2h-1V1h-2v1H7V1H5v1H4a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2zm0 11H4V6h8v7zM6 8H4V7h2v1zm3 0H7V7h2v1zm3 0h-2V7h2v1zm-6 3H4v-1h2v1zm3 0H7v-1h2v1z"/></svg>
+                Add to Calendar
               </a>
             </div>
             <a href="/" class="btn-secondary" style="display:inline-block;text-decoration:none">← Back to D8.Digital</a>
@@ -417,6 +421,20 @@
 
   <script>
   const OS_BASE = 'https://os.d8.digital';
+
+  /* ════════════════════════════════════════════════════════════
+     Runtime config — seeded from local CONFIG, overridden by
+     /gcal/config on load
+  ════════════════════════════════════════════════════════════ */
+  let config = {
+    timezone:        CONFIG.TIMEZONE,
+    dayStart:        CONFIG.DAY_START,
+    dayEnd:          CONFIG.DAY_END,
+    slotInterval:    CONFIG.SLOT_INTERVAL,
+    availableDays:   [1,2,3,4,5],
+    maxAdvanceDays:  60,
+    minAdvanceHours: 24,
+  };
 
   /* ════════════════════════════════════════════════════════════
      State
@@ -453,7 +471,15 @@
   }
 
   // Load calendar on page load since we start at step 2
-  document.addEventListener('DOMContentLoaded', renderCalendar);
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const remote = await fetch(`${OS_BASE}/gcal/config`).then(r => r.json());
+      Object.assign(config, remote);
+    } catch (e) {
+      console.warn('Could not load booking config, using defaults');
+    }
+    renderCalendar();
+  });
 
   /* ════════════════════════════════════════════════════════════
      Calendar render
@@ -472,16 +498,19 @@
     const first  = new Date(calYear, calMonth, 1).getDay();
     const daysIn = new Date(calYear, calMonth + 1, 0).getDate();
     const today  = new Date(); today.setHours(0,0,0,0);
+    const minTime = new Date(Date.now() + config.minAdvanceHours * 3600000);
+    const maxDate = new Date(today); maxDate.setDate(maxDate.getDate() + config.maxAdvanceDays);
 
     for (let i = 0; i < first; i++) grid.innerHTML += `<div class="cal-day empty"></div>`;
 
     for (let d = 1; d <= daysIn; d++) {
-      const dt   = new Date(calYear, calMonth, d);
-      const dow  = dt.getDay();
-      const past = dt < today;
-      const weekend = dow === 0 || dow === 6;
+      const dt      = new Date(calYear, calMonth, d);
+      const dow     = dt.getDay();
+      const dayEnd  = tzLocalToUTC(calYear, calMonth, d, config.dayEnd, 0, config.timezone);
+      const unavail = !config.availableDays.includes(dow);
+      const past    = dt < today || dayEnd <= minTime || dt > maxDate;
       let cls = 'cal-day';
-      if (past || weekend)          cls += ' past';
+      if (past || unavail) cls += ' past';
       if (dt.getTime() === today.getTime()) cls += ' today';
       if (state.selectedDate && dt.toDateString() === state.selectedDate.toDateString()) cls += ' selected';
 
@@ -507,11 +536,12 @@
   /* ════════════════════════════════════════════════════════════
      Time slots
   ════════════════════════════════════════════════════════════ */
+  // Returns UTC Date objects for each slot on `date` based on host timezone
   function allSlotsForDay(date) {
     const slots = [];
-    for (let h = CONFIG.DAY_START; h < CONFIG.DAY_END; h++) {
-      for (let m = 0; m < 60; m += CONFIG.SLOT_INTERVAL) {
-        slots.push(pad(h) + ':' + pad(m));
+    for (let h = config.dayStart; h < config.dayEnd; h++) {
+      for (let m = 0; m < 60; m += config.slotInterval) {
+        slots.push(tzLocalToUTC(date.getFullYear(), date.getMonth(), date.getDate(), h, m, config.timezone));
       }
     }
     return slots;
@@ -519,42 +549,52 @@
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
-  function formatSlot(s) {
-    const [h, m] = s.split(':').map(Number);
-    const ampm = h < 12 ? 'AM' : 'PM';
-    const h12  = h % 12 || 12;
-    return h12 + ':' + pad(m) + ' ' + ampm;
+  // Convert "h:m on calendar date in tz" → UTC Date
+  function tzLocalToUTC(year, month, day, hour, minute, tz) {
+    const pivot = Date.UTC(year, month, day, hour, minute, 0);
+    const parts = Object.fromEntries(
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, year:'numeric', month:'numeric', day:'numeric',
+        hour:'numeric', minute:'numeric', second:'numeric', hour12: false
+      }).formatToParts(new Date(pivot)).map(p => [p.type, p.value])
+    );
+    const h = parseInt(parts.hour);
+    const displayed = Date.UTC(
+      parseInt(parts.year), parseInt(parts.month) - 1, parseInt(parts.day),
+      h === 24 ? 0 : h, parseInt(parts.minute), 0
+    );
+    return new Date(pivot + (pivot - displayed));
   }
 
   async function loadSlots() {
-    const grid = document.getElementById('slotsGrid');
+    const grid  = document.getElementById('slotsGrid');
     const title = document.getElementById('slotsTitle');
-    const date = state.selectedDate;
+    const date  = state.selectedDate;
+    const vtz   = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     title.textContent = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
     grid.innerHTML = '<div class="slots-empty">Loading…</div>';
 
     await fetchBusy(date);
 
-    const slots = allSlotsForDay(date);
-    const now   = new Date();
+    const slots   = allSlotsForDay(date); // UTC Date objects
+    const minTime = new Date(Date.now() + config.minAdvanceHours * 3600000);
+    const timeFmt = new Intl.DateTimeFormat('en-US', { timeZone: vtz, hour: 'numeric', minute: '2-digit', hour12: true });
 
-    grid.innerHTML = slots.map(slot => {
-      const [h, m] = slot.split(':').map(Number);
-      const slotDt = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
-      const isPast = slotDt <= now;
-      const isBusy = state.busySlots.includes(slot);
-      const isSelected = state.selectedSlot === slot;
+    grid.innerHTML = slots.map(slotUTC => {
+      const key        = slotUTC.toISOString();
+      const isPast     = slotUTC <= minTime;
+      const isBusy     = state.busySlots.includes(key);
+      const isSelected = state.selectedSlot === key;
+      const label      = timeFmt.format(slotUTC);
 
-      if (isPast || isBusy) {
-        return `<div class="slot busy">${formatSlot(slot)}</div>`;
-      }
-      return `<div class="slot${isSelected ? ' selected' : ''}" onclick="selectSlot('${slot}', this)">${formatSlot(slot)}</div>`;
-    }).join('');
+      if (isPast || isBusy) return `<div class="slot busy">${label}</div>`;
+      return `<div class="slot${isSelected ? ' selected' : ''}" onclick="selectSlot('${key}', this)">${label}</div>`;
+    }).join('') || '<div class="slots-empty">No available times this day.</div>';
 
-    if (slots.length === 0) {
-      grid.innerHTML = '<div class="slots-empty">No available times this day.</div>';
-    }
+    const tzShort = Intl.DateTimeFormat('en-US', { timeZone: vtz, timeZoneName: 'short' })
+      .formatToParts(new Date()).find(p => p.type === 'timeZoneName')?.value || vtz;
+    document.getElementById('tzLabel').textContent = `All times in ${tzShort}`;
   }
 
   function selectSlot(slot, el) {
@@ -566,22 +606,20 @@
 
   async function fetchBusy(date) {
     try {
-      const start = new Date(date); start.setHours(0,0,0,0);
-      const end   = new Date(date); end.setHours(23,59,59,999);
+      const windowStart = tzLocalToUTC(date.getFullYear(), date.getMonth(), date.getDate(), config.dayStart, 0, config.timezone);
+      const windowEnd   = tzLocalToUTC(date.getFullYear(), date.getMonth(), date.getDate(), config.dayEnd,   0, config.timezone);
 
       const resp = await fetch(
-        `${OS_BASE}/gcal/availability?start=${start.toISOString()}&end=${end.toISOString()}`
+        `${OS_BASE}/gcal/availability?start=${windowStart.toISOString()}&end=${windowEnd.toISOString()}`
       );
       const data = await resp.json();
       state.busySlots = [];
       (data.busy || []).forEach(period => {
         const ps = new Date(period.start);
         const pe = new Date(period.end);
-        allSlotsForDay(date).forEach(slot => {
-          const [h, m] = slot.split(':').map(Number);
-          const slotStart = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
-          const slotEnd   = new Date(slotStart.getTime() + state.meetingDur * 60000);
-          if (slotStart < pe && slotEnd > ps) state.busySlots.push(slot);
+        allSlotsForDay(date).forEach(slotUTC => {
+          const slotEnd = new Date(slotUTC.getTime() + state.meetingDur * 60000);
+          if (slotUTC < pe && slotEnd > ps) state.busySlots.push(slotUTC.toISOString());
         });
       });
     } catch (e) {
@@ -600,15 +638,19 @@
   };
 
   function renderSummary() {
-    const box = document.getElementById('summaryBox');
-    const dateStr = state.selectedDate.toLocaleDateString('en-US', {
-      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-      timeZone: CONFIG.TIMEZONE,
+    const box    = document.getElementById('summaryBox');
+    const vtz    = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const slotDt = new Date(state.selectedSlot);
+    const dateStr = slotDt.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: vtz,
     });
+    const timeStr = slotDt.toLocaleTimeString('en-US', { timeZone: vtz, hour: 'numeric', minute: '2-digit', hour12: true });
+    const tzShort = Intl.DateTimeFormat('en-US', { timeZone: vtz, timeZoneName: 'short' })
+      .formatToParts(new Date()).find(p => p.type === 'timeZoneName')?.value || vtz;
     box.innerHTML = `
       <div class="sum-item"><div class="sum-label">Meeting</div><div class="sum-val">Discovery Call · 30 min</div></div>
       <div class="sum-item"><div class="sum-label">Date</div><div class="sum-val">${dateStr}</div></div>
-      <div class="sum-item"><div class="sum-label">Time</div><div class="sum-val">${formatSlot(state.selectedSlot)} CT</div></div>
+      <div class="sum-item"><div class="sum-label">Time</div><div class="sum-val">${timeStr} ${tzShort}</div></div>
     `;
   }
 
@@ -629,8 +671,7 @@
     showLoading('Creating your calendar event…');
 
     try {
-      const [h, m] = state.selectedSlot.split(':').map(Number);
-      const start = new Date(state.selectedDate.getFullYear(), state.selectedDate.getMonth(), state.selectedDate.getDate(), h, m);
+      const start = new Date(state.selectedSlot); // ISO UTC string from slot key
       const end   = new Date(start.getTime() + state.meetingDur * 60000);
 
       const resp = await fetch(`${OS_BASE}/gcal/book`, {
@@ -639,7 +680,7 @@
         body: JSON.stringify({
           start: start.toISOString(),
           end:   end.toISOString(),
-          timezone: CONFIG.TIMEZONE,
+          timezone: config.timezone,
           name: `${fname} ${lname}`.trim(),
           email, company, notes
         })
@@ -648,7 +689,7 @@
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || 'Booking failed');
 
-      showConfirmation({ fname, lname, email, company, meetLink: data.meetLink });
+      showConfirmation({ fname, lname, email, company, meetLink: data.meetLink, start: data.start, end: data.end });
     } catch (ex) {
       hideLoading();
       err.textContent = ex.message || 'Something went wrong. Please try again.';
@@ -656,19 +697,52 @@
     }
   }
 
-  function showConfirmation({ fname, lname, email, meetLink }) {
+  function makeICS({ summary, start, end, description, location }) {
+    const fmt = d => new Date(d).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    const uid = `d8-${Date.now()}@d8.digital`;
+    return [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//D8 Digital//Booking//EN',
+      'BEGIN:VEVENT',
+      `UID:${uid}`,
+      `DTSTART:${fmt(start)}`,
+      `DTEND:${fmt(end)}`,
+      `SUMMARY:${summary}`,
+      description ? `DESCRIPTION:${description.replace(/\n/g, '\\n')}` : '',
+      location   ? `LOCATION:${location}` : '',
+      'END:VEVENT', 'END:VCALENDAR',
+    ].filter(Boolean).join('\r\n');
+  }
+
+  function showConfirmation({ fname, lname, email, meetLink, start, end }) {
     hideLoading();
-    const dateStr = state.selectedDate.toLocaleDateString('en-US', {
-      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
-    });
+    const vtz     = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const slotDt  = new Date(state.selectedSlot);
+    const dateStr = slotDt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: vtz });
+    const timeStr = slotDt.toLocaleTimeString('en-US', { timeZone: vtz, hour: 'numeric', minute: '2-digit', hour12: true });
+    const tzShort = Intl.DateTimeFormat('en-US', { timeZone: vtz, timeZoneName: 'short' })
+      .formatToParts(new Date()).find(p => p.type === 'timeZoneName')?.value || vtz;
     document.getElementById('confirmDetails').innerHTML = `
       <div class="confirm-row"><span class="confirm-row-label">Name</span><span class="confirm-row-val">${fname} ${lname}</span></div>
       <div class="confirm-row"><span class="confirm-row-label">Email</span><span class="confirm-row-val">${email}</span></div>
       <div class="confirm-row"><span class="confirm-row-label">Type</span><span class="confirm-row-val">${MEETING_LABELS[state.meetingType]}</span></div>
       <div class="confirm-row"><span class="confirm-row-label">Date</span><span class="confirm-row-val">${dateStr}</span></div>
-      <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-val">${formatSlot(state.selectedSlot)} CT</span></div>
+      <div class="confirm-row"><span class="confirm-row-label">Time</span><span class="confirm-row-val">${timeStr} ${tzShort}</span></div>
       <div class="confirm-row"><span class="confirm-row-label">Duration</span><span class="confirm-row-val">${state.meetingDur} min</span></div>
     `;
+
+    if (start && end) {
+      const desc = meetLink ? `Join Google Meet: ${meetLink}` : '';
+      const ics = makeICS({
+        summary: `Discovery Call with D8.Digital`,
+        start, end,
+        description: desc,
+        location: meetLink || '',
+      });
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const btn = document.getElementById('addCalBtn');
+      btn.href = URL.createObjectURL(blob);
+      document.getElementById('addCalWrap').style.display = 'block';
+    }
 
     if (meetLink) {
       document.getElementById('meetLinkWrap').style.display = 'block';
