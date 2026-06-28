@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book a Call | D8.Digital</title>
   <meta name="description" content="Schedule a free 30-minute discovery call with D8.Digital. Pick a time that works for you.">
-  <link rel="canonical" href="https://d8.digital/book">
+  <meta property="og:title" content="Book a Call | D8.Digital">
+  <meta property="og:description" content="Schedule a free 30-minute discovery call with D8.Digital. Pick a time that works for you.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://d8.digital/book.html">
+  <meta property="og:image" content="https://d8.digital/images/og-default.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://d8.digital/book.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
@@ -324,9 +330,9 @@
             <!-- Calendar -->
             <div>
               <div class="cal-header">
-                <button class="cal-nav" onclick="shiftMonth(-1)">‹</button>
+                <button class="cal-nav" onclick="shiftMonth(-1)" aria-label="Previous month">‹</button>
                 <div class="cal-title" id="calTitle"></div>
-                <button class="cal-nav" onclick="shiftMonth(1)">›</button>
+                <button class="cal-nav" onclick="shiftMonth(1)" aria-label="Next month">›</button>
               </div>
               <div class="cal-grid" id="calGrid"></div>
             </div>
