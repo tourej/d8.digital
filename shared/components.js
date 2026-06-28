@@ -121,6 +121,11 @@
     setupCursor();
     // Nav + reveals need the injected DOM to exist first
     setTimeout(() => { setupNav(); setupReveals(); }, 0);
+    // Website OS loader
+    var s = document.createElement('script');
+    s.src = 'https://os.d8.digital/os-loader.js';
+    s.setAttribute('data-site', 'fc4c9922805529047d1a5ac05d112b29');
+    document.body.appendChild(s);
   }
 
   if (document.readyState === 'loading') {

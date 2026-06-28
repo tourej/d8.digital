@@ -179,10 +179,7 @@
           <div class="form-body">
             <div class="form-title">Send a Message</div>
 
-            <!-- TODO: FORM ENGINE — wire this form to Website OS once the D8 project folder is added.
-                 Website OS will handle submission, routing, and notifications.
-                 Placeholder action keeps the form inert until then. -->
-            <form id="contact-form" action="#" method="POST" novalidate>
+            <form id="contact-form" novalidate>
               <div class="field-row">
                 <div class="field">
                   <label for="cf-name">Your Name</label>
@@ -287,10 +284,10 @@
         submit.textContent = 'Sending...';
 
         try {
-          const res = await fetch(form.action, {
+          const res = await fetch('https://os.d8.digital/forms/submit', {
             method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ site_key: 'fc4c9922805529047d1a5ac05d112b29', form_type: 'contact', name, email, service: need, message: msg })
           });
 
           if (res.ok) {
