@@ -127,28 +127,32 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    const burger = document.getElementById('navBurger');
-    const menu   = document.getElementById('mobileMenu');
-    if (burger && menu) {
-      burger.addEventListener('click', () => {
-        const open = menu.classList.toggle('open');
-        nav.classList.toggle('open', open);
-        burger.setAttribute('aria-expanded', String(open));
-        burger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-        menu.setAttribute('aria-hidden', String(!open));
-        document.body.style.overflow = open ? 'hidden' : '';
-      });
-      menu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          menu.classList.remove('open');
-          nav.classList.remove('open');
-          burger.setAttribute('aria-expanded', 'false');
-          burger.setAttribute('aria-label', 'Open navigation');
-          menu.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-        });
-      });
+    // Event delegation — survives DOM changes by async third-party scripts (os-loader etc.)
+    function closeMobileMenu() {
+      const m = document.getElementById('mobileMenu');
+      const n = document.getElementById('nav');
+      const b = document.getElementById('navBurger');
+      if (m) { m.classList.remove('open'); m.setAttribute('aria-hidden', 'true'); }
+      if (n) n.classList.remove('open');
+      if (b) { b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-label', 'Open navigation'); }
+      document.body.style.overflow = '';
     }
+    document.addEventListener('click', e => {
+      if (e.target.closest('#navBurger')) {
+        const m = document.getElementById('mobileMenu');
+        const n = document.getElementById('nav');
+        const b = document.getElementById('navBurger');
+        if (!m || !n || !b) return;
+        const open = m.classList.toggle('open');
+        n.classList.toggle('open', open);
+        b.setAttribute('aria-expanded', String(open));
+        b.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        m.setAttribute('aria-hidden', String(!open));
+        document.body.style.overflow = open ? 'hidden' : '';
+      } else if (e.target.closest('.mobile-menu a')) {
+        closeMobileMenu();
+      }
+    });
   }
 
   /* ── Scroll reveals ───────────────────────────────────── */

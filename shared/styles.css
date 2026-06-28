@@ -505,7 +505,7 @@ footer {
 .art-default { background: oklch(12% 0.01 145); }
 
 /* ── Responsive ─────────────────────────────────────────── */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   body { cursor: auto; }
   .cur, .cur-ring { display: none; }
 
